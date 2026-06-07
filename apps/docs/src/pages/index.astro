@@ -1,0 +1,96 @@
+---
+import Base from "../layouts/Base.astro";
+
+const values = [
+  {
+    title: "Zero dependency",
+    body: "The React package ships no runtime dependencies. Components are plain markup styled with CSS variables, so they stay small and predictable.",
+  },
+  {
+    title: "Themeable",
+    body: "Everything reads from design tokens. Change the primary colour, radius or spacing once and the whole system follows.",
+  },
+  {
+    title: "Accessible",
+    body: "Built to WCAG 2.2 AA: real labels, a visible 4px focus halo, 44px touch targets and sensible keyboard behaviour.",
+  },
+  {
+    title: "LLM friendly",
+    body: "A machine-readable llms.txt index, typed contracts and per-component usage notes make the system easy for coding agents to use correctly.",
+  },
+];
+---
+
+<Base
+  title="UX4G — community packaging"
+  description="Zero-dependency React components and CSS-variable design tokens for India's UX4G government design system."
+>
+  <!-- Hero -->
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Community packaging</span>
+      <h1 class="h-display" style="max-width: 18ch;">
+        India's government design system, ready for your React app.
+      </h1>
+      <p class="lead" style="margin-top: var(--space-5);">
+        UX4G is the User Experience for Good Governance design system. This is an
+        unofficial, ultra-light packaging of it: 32 zero-dependency React
+        components and CSS-variable design tokens you can drop into any project,
+        as an npm package or a shadcn-style registry you own outright.
+      </p>
+      <div style="display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-7);">
+        <a class="cta cta--primary" href="/install">Get started</a>
+        <a class="cta cta--outlined" href="/components">Browse components</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value props -->
+  <section class="section section--tight" style="background: var(--color-surface-subtle); border-block: var(--border-thin) solid var(--color-divider);">
+    <div class="container">
+      <h2 class="h-section">Why this packaging</h2>
+      <p class="lead" style="margin-top: var(--space-3);">
+        The same UX4G look and feel, made calm to install and reason about.
+      </p>
+      <div class="grid grid--4" style="margin-top: var(--space-7);">
+        {values.map((v) => (
+          <div class="surface">
+            <h3 class="h-sub" style="font-size: var(--headline-6-size); line-height: var(--headline-6-line);">{v.title}</h3>
+            <p style="margin-top: var(--space-3); color: var(--color-text-muted); font-size: var(--body-2-size);">{v.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Two ways to use it -->
+  <section class="section">
+    <div class="container">
+      <h2 class="h-section">Two ways to use it</h2>
+      <p class="lead" style="margin-top: var(--space-3);">
+        Install the package and import components, or copy the source for a single
+        component into your repo and own it.
+      </p>
+      <div class="grid grid--2" style="margin-top: var(--space-7);">
+        <div class="surface stack">
+          <h3 class="h-sub">As an npm package</h3>
+          <p style="color: var(--color-text-muted); font-size: var(--body-2-size);">
+            Add the two packages, import the tokens CSS once at your app root, then
+            import components anywhere. Updates arrive through your package manager.
+          </p>
+          <pre class="code-block"><code><span class="tok-keyword">pnpm</span> add @hopline/ux4g-react @hopline/ux4g-tokens</code></pre>
+          <a class="cta cta--outlined" href="/install">npm setup</a>
+        </div>
+        <div class="surface stack">
+          <h3 class="h-sub">As a shadcn registry</h3>
+          <p style="color: var(--color-text-muted); font-size: var(--body-2-size);">
+            Pull a single component's source into your project with the shadcn CLI.
+            You own the file and can change anything; tokens keep it on-brand.
+          </p>
+          <pre class="code-block"><code><span class="tok-keyword">npx</span> shadcn add ./registry/r/button.json</code></pre>
+          <a class="cta cta--outlined" href="/install">Registry setup</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

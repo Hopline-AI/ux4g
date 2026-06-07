@@ -1,0 +1,44 @@
+---
+import Base from "../layouts/Base.astro";
+import Showcase from "../components/Showcase.tsx";
+
+const groups = [
+  { id: "actions", label: "Actions" },
+  { id: "forms", label: "Forms" },
+  { id: "display", label: "Display" },
+  { id: "feedback", label: "Feedback" },
+  { id: "overlay", label: "Overlay" },
+  { id: "data", label: "Data" },
+  { id: "navigation", label: "Navigation" },
+  { id: "media", label: "Media" },
+];
+---
+
+<Base title="Components" description="All 32 UX4G components rendered live, grouped by the eight system groups.">
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Components</span>
+      <h1 class="h-display" style="font-size: clamp(36px, 5vw, var(--headline-1-size)); max-width: 20ch;">
+        The full set, rendered live
+      </h1>
+      <p class="lead" style="margin-top: var(--space-5);">
+        All 32 components across eight groups, shown in their canonical states.
+        Everything here is the real <code class="code-inline">@hopline/ux4g-react</code>
+        library running in the page, styled only by the design tokens.
+      </p>
+      <p style="margin-top: var(--space-4); color: var(--color-text-muted); font-size: var(--body-2-size); max-width: 62ch;">
+        Each component's exact API contract lives in
+        <code class="code-inline">packages/react/contracts</code>, with usage notes
+        in the matching <code class="code-inline">*.prompt.md</code> file beside the source.
+      </p>
+
+      <nav aria-label="Component groups" style="margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-2);">
+        {groups.map((g) => (
+          <a class="site-nav__link" href={`#${g.id}`} style="border: var(--border-thin) solid var(--color-border);">{g.label}</a>
+        ))}
+      </nav>
+
+      <Showcase client:load />
+    </div>
+  </section>
+</Base>
