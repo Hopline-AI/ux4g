@@ -1,0 +1,57 @@
+/* ============================================================
+   UX4G Design System — Typography tokens
+   Primary typeface: Noto Sans (Indic-script coverage, WCAG-tuned)
+   Mono: Red Hat Mono · Interface accent: Roboto (button labels)
+   ============================================================ */
+:root {
+  /* ---- Font families ---- */
+  --font-sans: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-ui:   "Roboto", "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  --font-mono: "Red Hat Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* ---- Weights ---- */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold: 600;
+  --weight-bold:    700;
+
+  /* ---- Type scale (size / line-height) ---- */
+  /* Display */
+  --display-1-size: 80px;  --display-1-line: 100px;
+  --display-2-size: 72px;  --display-2-line: 88px;
+  --display-3-size: 64px;  --display-3-line: 80px;
+  --display-5-size: 48px;  --display-5-line: 56px;
+  --display-6-size: 40px;  --display-6-line: 48px;
+  /* Headline */
+  --headline-1-size: 40px; --headline-1-line: 48px;
+  --headline-2-size: 32px; --headline-2-line: 40px;
+  --headline-3-size: 28px; --headline-3-line: 32px;
+  --headline-4-size: 24px; --headline-4-line: 28px;
+  --headline-5-size: 20px; --headline-5-line: 24px;
+  --headline-6-size: 16px; --headline-6-line: 20px;
+  /* Title */
+  --title-1-size: 22px;    --title-1-line: 28px;
+  --title-2-size: 16px;    --title-2-line: 24px;    --title-2-tracking: 0.15px;
+  --title-3-size: 14px;    --title-3-line: 20px;    --title-3-tracking: 0.1px;
+  /* Label */
+  --label-1-size: 14px;    --label-1-line: 20px;    --label-1-tracking: 0.1px;
+  --label-2-size: 12px;    --label-2-line: 16px;    --label-2-tracking: 0.5px;
+  --label-3-size: 11px;    --label-3-line: 16px;    --label-3-tracking: 0.5px;
+  /* Body */
+  --body-1-size: 16px;     --body-1-line: 24px;     --body-1-tracking: 0.5px;
+  --body-2-size: 14px;     --body-2-line: 20px;     --body-2-tracking: 0.25px;
+  --body-3-size: 12px;     --body-3-line: 16px;     --body-3-tracking: 0.4px;
+}
+
+/* ---- Optional helper classes (foundation specimens & quick markup) ---- */
+.ux-display-1 { font-family: var(--font-sans); font-weight: var(--weight-medium); font-size: var(--display-1-size); line-height: var(--display-1-line); letter-spacing: -0.5px; }
+.ux-display-3 { font-family: var(--font-sans); font-weight: var(--weight-regular); font-size: var(--display-3-size); line-height: var(--display-3-line); }
+.ux-display-6 { font-family: var(--font-sans); font-weight: var(--weight-medium); font-size: var(--display-6-size); line-height: var(--display-6-line); }
+.ux-headline-2 { font-family: var(--font-sans); font-weight: var(--weight-medium); font-size: var(--headline-2-size); line-height: var(--headline-2-line); }
+.ux-headline-4 { font-family: var(--font-sans); font-weight: var(--weight-medium); font-size: var(--headline-4-size); line-height: var(--headline-4-line); }
+.ux-headline-6 { font-family: var(--font-sans); font-weight: var(--weight-medium); font-size: var(--headline-6-size); line-height: var(--headline-6-line); }
+.ux-title-2 { font-family: var(--font-sans); font-weight: var(--weight-medium); font-size: var(--title-2-size); line-height: var(--title-2-line); letter-spacing: var(--title-2-tracking); }
+.ux-label-2 { font-family: var(--font-sans); font-weight: var(--weight-medium); font-size: var(--label-2-size); line-height: var(--label-2-line); letter-spacing: var(--label-2-tracking); text-transform: uppercase; }
+.ux-body-1 { font-family: var(--font-sans); font-weight: var(--weight-regular); font-size: var(--body-1-size); line-height: var(--body-1-line); letter-spacing: var(--body-1-tracking); }
+.ux-body-2 { font-family: var(--font-sans); font-weight: var(--weight-regular); font-size: var(--body-2-size); line-height: var(--body-2-line); letter-spacing: var(--body-2-tracking); }
+.ux-mono { font-family: var(--font-mono); font-weight: var(--weight-medium); }

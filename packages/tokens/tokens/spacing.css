@@ -1,0 +1,59 @@
+/* ============================================================
+   UX4G Design System — Spacing, radius, shadow & layout tokens
+   8-point spacing grid. Shadow scale xs → xxl.
+   ============================================================ */
+:root {
+  /* ---- Spacing (8pt grid, with 4px half-steps) ---- */
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  40px;
+  --space-8:  48px;
+  --space-9:  56px;
+  --space-10: 64px;
+  --space-12: 80px;
+  --space-14: 96px;
+  --space-16: 120px;
+  --space-20: 160px;
+
+  /* ---- Radius ---- */
+  --radius-xs:   4px;
+  --radius-sm:   5px;   /* small controls */
+  --radius-md:   8px;   /* buttons, inputs */
+  --radius-lg:   12px;  /* cards */
+  --radius-xl:   16px;  /* chips, pill labels */
+  --radius-2xl:  24px;  /* large surfaces, hero panels */
+  --radius-full: 999px;
+
+  /* ---- Border widths ---- */
+  --border-thin: 1px;
+  --border-md:   1.5px;
+  --border-thick: 2px;
+
+  /* ---- Elevation / shadows ---- */
+  --shadow-xs:  0 1px 2px 0 rgba(33, 33, 33, 0.08);
+  --shadow-s:   0 2px 3px 1px rgba(33, 33, 33, 0.12);
+  --shadow-md:  0 4px 8px 0 rgba(33, 33, 33, 0.12);
+  --shadow-l:   0 8px 16px 0 rgba(33, 33, 33, 0.14);
+  --shadow-xl:  0 12px 24px 0 rgba(33, 33, 33, 0.16);
+  --shadow-xxl: 0 20px 40px 0 rgba(33, 33, 33, 0.20);
+
+  /* ---- Focus ring ---- */
+  --focus-ring: 0 0 0 4px var(--color-focus);
+
+  /* ---- Layout ---- */
+  --container-max: 1280px;
+  --layout-gutter: 24px;
+  --layout-columns: 12; /* @kind other */
+
+  /* ---- Motion ---- */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1); /* @kind other */
+  --ease-emphasized: cubic-bezier(0.3, 0, 0, 1); /* @kind other */
+  --duration-fast: 120ms; /* @kind other */
+  --duration-base: 200ms; /* @kind other */
+  --duration-slow: 300ms; /* @kind other */
+}

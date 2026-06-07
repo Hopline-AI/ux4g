@@ -1,0 +1,49 @@
+/* ============================================================
+   UX4G Design System — base / reset layer
+   Light, opinionated normalize so specimen cards, components and
+   UI kits share a baseline. Body text defaults to Noto Sans.
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--body-1-size);
+  line-height: var(--body-1-line);
+  letter-spacing: var(--body-1-tracking);
+  color: var(--color-text);
+  background: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+p { margin: 0; text-wrap: pretty; }
+
+a {
+  color: var(--color-text-link);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+/* Accessible focus — visible 4px violet halo on keyboard nav */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+img, svg { display: block; max-width: 100%; }
+
+code, kbd, samp, pre { font-family: var(--font-mono); }
+
+::selection { background: var(--violet-200); color: var(--neutral-900); }
