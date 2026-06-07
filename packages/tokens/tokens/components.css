@@ -1,0 +1,41 @@
+/* ============================================================
+   UX4G Design System — component interaction layer
+   Hover / active / focus states that inline styles can't express.
+   Components set CSS custom props (e.g. --btn-hover); these rules
+   consume them. Shipped via styles.css so consumers get it free.
+   ============================================================ */
+
+/* ---- Button ---- */
+.ux-btn:not(:disabled):hover[data-appearance="filled"]   { background: var(--btn-hover) !important; }
+.ux-btn:not(:disabled):active[data-appearance="filled"]  { background: var(--btn-active) !important; }
+.ux-btn:not(:disabled):hover[data-appearance="outlined"] { background: var(--btn-tint) !important; }
+.ux-btn:not(:disabled):hover[data-appearance="text"]     { background: var(--btn-tint) !important; }
+.ux-btn:not(:disabled):hover[data-appearance="tonal"]    { filter: brightness(0.96); }
+.ux-btn:not(:disabled):active { transform: translateY(0.5px); }
+.ux-btn:focus-visible { outline: none !important; box-shadow: var(--focus-ring); }
+
+/* ---- Icon button ---- */
+.ux-iconbtn:not(:disabled):hover { background: var(--ib-hover) !important; }
+.ux-iconbtn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+
+/* ---- Input / Select / Textarea ---- */
+.ux-field:hover:not(:disabled):not([aria-invalid="true"]) { border-color: var(--neutral-500); }
+.ux-field:focus { outline: none; border-color: var(--color-primary); box-shadow: var(--focus-ring); }
+.ux-field[aria-invalid="true"] { border-color: var(--color-danger); }
+.ux-field[aria-invalid="true"]:focus { box-shadow: 0 0 0 4px rgba(219,40,41,0.32); }
+.ux-field::placeholder { color: var(--neutral-500); }
+
+/* ---- Choice controls (checkbox / radio / switch) ---- */
+.ux-choice input:focus-visible + .ux-choice__box,
+.ux-choice input:focus-visible + .ux-switch__track { box-shadow: var(--focus-ring); }
+
+/* ---- Tabs ---- */
+.ux-tab:hover { color: var(--color-text); }
+.ux-tab:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--radius-xs); }
+
+/* ---- Chip ---- */
+.ux-chip[data-clickable="true"]:hover { background: var(--neutral-100); }
+.ux-chip__remove:hover { background: var(--neutral-200); }
+
+/* ---- Link-like ---- */
+.ux-link:hover { text-decoration: underline; }

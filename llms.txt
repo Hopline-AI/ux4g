@@ -1,0 +1,32 @@
+# UX4G (Hopline community packaging)
+
+Zero-dependency React components + CSS-variable design tokens for India's
+UX4G government design system. Unofficial packaging of UX4G (© NeGD · MeitY).
+
+## House rules
+- Primary is violet #613AF5 on a clean white/light-neutral canvas. Flat fills, no gradients.
+- Type: Noto Sans (Indic coverage); Roboto Medium for button labels; Red Hat Mono for code.
+- Sentence case. Plain, instructional, citizen-first voice ("you"). No emoji in product UI.
+- Accessibility: WCAG 2.2 AA, visible 4px violet focus halo, 44px touch targets, real labels.
+- Icons: inline SVG (Lucide geometry, 24x24, 2px stroke), passed via iconLeft/icon props.
+
+## Setup
+- import "@hopline/ux4g-tokens/styles.css" once at the app root (REQUIRED).
+- import { Button, Input, ... } from "@hopline/ux4g-react".
+
+## Tokens
+- CSS variables: packages/tokens/tokens/*.css (semantic aliases: --color-primary, --color-text, --color-border, --color-focus, --radius-md, --space-4, --shadow-md).
+- Typed JS: import { theme, tokens } from "@hopline/ux4g-tokens/theme".
+
+## Components (32; usage note beside each source as *.prompt.md, contract in contracts/)
+- actions: Button, IconButton
+- forms: Input, Textarea, Select, Checkbox, Radio, Switch, Search, DatePicker, RangeSlider, ColorPicker, FileUpload
+- display: Card, Badge, Chip, Avatar
+- feedback: Alert, Progress, Spinner, EmptyState
+- overlay: Modal, Tooltip, Menu, Toast
+- data: Table, Accordion, Pagination
+- navigation: Tabs, Breadcrumb, Stepper
+- media: Carousel
+
+## Install one component (own the source)
+- npx shadcn add ./registry/r/button.json   (local; public @ux4g namespace once the site hosts it)

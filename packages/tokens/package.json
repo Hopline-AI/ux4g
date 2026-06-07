@@ -1,0 +1,30 @@
+{
+  "name": "@hopline/ux4g-tokens",
+  "version": "0.1.0",
+  "description": "UX4G design tokens (CSS variables + typed theme). Unofficial community packaging of UX4G — © NeGD · MeitY · ux4g.gov.in.",
+  "license": "MIT",
+  "type": "module",
+  "files": ["styles.css", "tokens", "dist"],
+  "exports": {
+    "./styles.css": "./styles.css",
+    "./tokens/*": "./tokens/*",
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "import": "./dist/theme.js",
+      "require": "./dist/theme.cjs"
+    }
+  },
+  "scripts": {
+    "gen:theme": "tsx scripts/gen-theme.ts",
+    "build": "pnpm gen:theme && tsup",
+    "typecheck": "pnpm gen:theme && tsc --noEmit",
+    "test": "pnpm gen:theme && vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsup": "^8.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.0.0"
+  }
+}

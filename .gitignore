@@ -1,0 +1,20 @@
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+
+# planning + design docs: kept on disk only, never committed
+docs/superpowers/
+design-source/
+
+# generated registry output (regenerable)
+registry/r/
+
+# Playwright run artifacts (regenerable)
+test-results/
+playwright-report/
+
+# Astro docs app (build output + generated registry copy)
+apps/docs/.astro/
+apps/docs/public/r/
+apps/docs/public/registry.json

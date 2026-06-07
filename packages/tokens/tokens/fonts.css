@@ -1,0 +1,8 @@
+/* ============================================================
+   UX4G Design System — Webfonts
+   Noto Sans, Roboto and Red Hat Mono are open-source typefaces
+   served here from Google Fonts. To ship fully offline, drop the
+   .woff2 binaries into assets/fonts/ and swap these @import lines
+   for local @font-face rules.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Red+Hat+Mono:wght@400;500;600&family=Roboto:wght@400;500;700&display=swap');

@@ -1,0 +1,136 @@
+/* ============================================================
+   UX4G Design System — Color tokens
+   Government of India · User Experience for Good Governance
+   Primary palette is themeable (UX4G "Theme Craft"). Default
+   theme: Primary = Violet #613AF5, Secondary = Slate-Violet.
+   ============================================================ */
+:root {
+  /* ---- Brand / Primary (Violet) ---- */
+  --violet-50:  #F4F3FE;
+  --violet-100: #ECD0FF;
+  --violet-200: #DAB2FF;
+  --violet-300: #C495FF;
+  --violet-400: #AC7AFF;
+  --violet-500: #7C5BF7;
+  --violet-600: #613AF5; /* brand source */
+  --violet-700: #4A26C4;
+  --violet-800: #381C8A;
+  --violet-900: #2A1466;
+
+  /* ---- Secondary (Slate Violet) ---- */
+  --secondary-50:  #F4F3F9;
+  --secondary-100: #ECEAF3;
+  --secondary-200: #D9D6E7;
+  --secondary-300: #C0BBD7;
+  --secondary-400: #A7A0C6;
+  --secondary-500: #8981AB;
+  --secondary-600: #746D96;
+  --secondary-700: #60597F;
+  --secondary-800: #4D4768;
+  --secondary-900: #3A364F;
+
+  /* ---- Success (Green) ---- */
+  --success-50:  #EDF7E6;
+  --success-100: #E3F2D9;
+  --success-200: #C6E5B5;
+  --success-300: #9BCF80;
+  --success-400: #69B349;
+  --success-500: #389314;
+  --success-600: #107400; /* brand-aligned governance green */
+  --success-700: #005A00;
+  --success-800: #024900;
+  --success-900: #013300;
+
+  /* ---- Danger / Error (Red) ---- */
+  --danger-50:  #FFEEEA;
+  --danger-100: #FEDAD3;
+  --danger-200: #FEAEAE;
+  --danger-300: #FF7A7A;
+  --danger-400: #F35B5B;
+  --danger-500: #DB2829;
+  --danger-600: #C21D22;
+  --danger-700: #B7131A;
+  --danger-800: #8E0F15;
+  --danger-900: #6B0B10;
+
+  /* ---- Warning (Orange) ---- */
+  --warning-50:  #FEF1E7;
+  --warning-100: #FDDCC2;
+  --warning-200: #FBC499;
+  --warning-300: #F6A766;
+  --warning-400: #F2933F;
+  --warning-500: #EE8033;
+  --warning-600: #D86A1E;
+  --warning-700: #B5551A;
+  --warning-800: #8F4314;
+  --warning-900: #6B320F;
+
+  /* ---- Info (Blue, drawn from logo + chart palette) ---- */
+  --info-50:  #E8F1FB;
+  --info-100: #C7DDF5;
+  --info-200: #8FBBEB;
+  --info-300: #5798DD;
+  --info-400: #2E80D2;
+  --info-500: #2384C5;
+  --info-600: #1F6FB0;
+  --info-700: #1937B2; /* logo blue */
+  --info-800: #15296F;
+  --info-900: #0F1C4B;
+
+  /* ---- Neutral (Grey ramp) ---- */
+  --white:      #FFFFFF;
+  --neutral-50:  #F8F8F8;
+  --neutral-100: #F3F3F3;
+  --neutral-200: #EEEEEE;
+  --neutral-300: #DBDBDB;
+  --neutral-400: #C6C6C6;
+  --neutral-500: #ABABAB;
+  --neutral-600: #727272;
+  --neutral-700: #525252;
+  --neutral-800: #393939;
+  --neutral-900: #212121;
+  --black:      #000000;
+
+  /* ============================================================
+     Semantic aliases — reference these in components, not raw ramps
+     ============================================================ */
+  --color-primary:          var(--violet-600);
+  --color-primary-hover:    var(--violet-700);
+  --color-primary-active:   var(--violet-800);
+  --color-primary-subtle:   var(--violet-50);
+  --color-on-primary:       var(--white);
+
+  --color-secondary:        var(--secondary-500);
+  --color-secondary-hover:  var(--secondary-600);
+
+  --color-success:          var(--success-600);
+  --color-success-subtle:   var(--success-50);
+  --color-danger:           var(--danger-500);
+  --color-danger-hover:     var(--danger-600);
+  --color-danger-subtle:    var(--danger-50);
+  --color-warning:          var(--warning-500);
+  --color-warning-subtle:   var(--warning-50);
+  --color-info:             var(--info-700);
+  --color-info-subtle:      var(--info-50);
+
+  /* Text */
+  --color-text:             var(--neutral-900);
+  --color-text-muted:       var(--neutral-600);
+  --color-text-subtle:      var(--neutral-500);
+  --color-text-inverse:     var(--white);
+  --color-text-link:        var(--violet-600);
+
+  /* Surfaces */
+  --color-surface:          var(--white);
+  --color-surface-subtle:   var(--neutral-50);
+  --color-surface-muted:    var(--neutral-100);
+  --color-surface-brand:    var(--secondary-50);
+
+  /* Borders & dividers */
+  --color-border:           var(--neutral-300);
+  --color-border-strong:    var(--neutral-400);
+  --color-divider:          var(--neutral-200);
+
+  /* Focus ring (WCAG-visible, 4px violet halo) */
+  --color-focus:            rgba(97, 58, 245, 0.48);
+}

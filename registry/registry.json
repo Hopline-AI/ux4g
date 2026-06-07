@@ -1,0 +1,205 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "ux4g",
+  "homepage": "https://github.com/Hopline-AI/ux4g",
+  "items": [
+    {
+      "name": "ux4g-tokens",
+      "type": "registry:file",
+      "title": "UX4G tokens",
+      "description": "UX4G design tokens + interaction layer (one CSS file)."
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "UX4G Button",
+      "description": "UX4G Button component."
+    },
+    {
+      "name": "iconbutton",
+      "type": "registry:ui",
+      "title": "UX4G IconButton",
+      "description": "UX4G IconButton component."
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "UX4G Accordion",
+      "description": "UX4G Accordion component."
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "UX4G Pagination",
+      "description": "UX4G Pagination component."
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "UX4G Table",
+      "description": "UX4G Table component."
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "UX4G Avatar",
+      "description": "UX4G Avatar component."
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "UX4G Badge",
+      "description": "UX4G Badge component."
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "UX4G Card",
+      "description": "UX4G Card component."
+    },
+    {
+      "name": "chip",
+      "type": "registry:ui",
+      "title": "UX4G Chip",
+      "description": "UX4G Chip component."
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "UX4G Alert",
+      "description": "UX4G Alert component."
+    },
+    {
+      "name": "emptystate",
+      "type": "registry:ui",
+      "title": "UX4G EmptyState",
+      "description": "UX4G EmptyState component."
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "UX4G Progress",
+      "description": "UX4G Progress component."
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "UX4G Spinner",
+      "description": "UX4G Spinner component."
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "UX4G Checkbox",
+      "description": "UX4G Checkbox component."
+    },
+    {
+      "name": "colorpicker",
+      "type": "registry:ui",
+      "title": "UX4G ColorPicker",
+      "description": "UX4G ColorPicker component."
+    },
+    {
+      "name": "datepicker",
+      "type": "registry:ui",
+      "title": "UX4G DatePicker",
+      "description": "UX4G DatePicker component."
+    },
+    {
+      "name": "fileupload",
+      "type": "registry:ui",
+      "title": "UX4G FileUpload",
+      "description": "UX4G FileUpload component."
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "UX4G Input",
+      "description": "UX4G Input component."
+    },
+    {
+      "name": "radio",
+      "type": "registry:ui",
+      "title": "UX4G Radio",
+      "description": "UX4G Radio component."
+    },
+    {
+      "name": "rangeslider",
+      "type": "registry:ui",
+      "title": "UX4G RangeSlider",
+      "description": "UX4G RangeSlider component."
+    },
+    {
+      "name": "search",
+      "type": "registry:ui",
+      "title": "UX4G Search",
+      "description": "UX4G Search component."
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "UX4G Select",
+      "description": "UX4G Select component."
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "UX4G Switch",
+      "description": "UX4G Switch component."
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "UX4G Textarea",
+      "description": "UX4G Textarea component."
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "UX4G Carousel",
+      "description": "UX4G Carousel component."
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "UX4G Breadcrumb",
+      "description": "UX4G Breadcrumb component."
+    },
+    {
+      "name": "stepper",
+      "type": "registry:ui",
+      "title": "UX4G Stepper",
+      "description": "UX4G Stepper component."
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "UX4G Tabs",
+      "description": "UX4G Tabs component."
+    },
+    {
+      "name": "menu",
+      "type": "registry:ui",
+      "title": "UX4G Menu",
+      "description": "UX4G Menu component."
+    },
+    {
+      "name": "modal",
+      "type": "registry:ui",
+      "title": "UX4G Modal",
+      "description": "UX4G Modal component."
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "UX4G Toast",
+      "description": "UX4G Toast component."
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "UX4G Tooltip",
+      "description": "UX4G Tooltip component."
+    }
+  ]
+}

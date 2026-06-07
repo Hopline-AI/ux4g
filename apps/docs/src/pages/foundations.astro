@@ -1,0 +1,183 @@
+---
+import Base from "../layouts/Base.astro";
+
+// ---- Colour data (token names pulled from packages/tokens/tokens/colors.css) ----
+const primaryRamp = [
+  "--violet-50", "--violet-100", "--violet-200", "--violet-300", "--violet-400",
+  "--violet-500", "--violet-600", "--violet-700", "--violet-800", "--violet-900",
+];
+
+const semantic = [
+  { name: "--color-success", note: "Success" },
+  { name: "--color-danger", note: "Danger" },
+  { name: "--color-warning", note: "Warning" },
+  { name: "--color-info", note: "Info" },
+];
+
+const neutralRamp = [
+  "--neutral-50", "--neutral-100", "--neutral-200", "--neutral-300", "--neutral-400",
+  "--neutral-500", "--neutral-600", "--neutral-700", "--neutral-800", "--neutral-900",
+];
+
+// ---- Type scale (size/line tokens from typography.css) ----
+const typeScale = [
+  { label: "Display 6", token: "--display-6", weight: 500, sample: "Good governance, by design" },
+  { label: "Headline 1", token: "--headline-1", weight: 500, sample: "Apply for a scheme" },
+  { label: "Headline 3", token: "--headline-3", weight: 500, sample: "Track your application" },
+  { label: "Headline 5", token: "--headline-5", weight: 500, sample: "Documents needed" },
+  { label: "Title 1", token: "--title-1", weight: 500, sample: "Eligibility criteria" },
+  { label: "Body 1", token: "--body-1", weight: 400, sample: "Body 1 is the default reading size, set in Noto Sans for broad Indic-script coverage." },
+  { label: "Body 2", token: "--body-2", weight: 400, sample: "Body 2 is used for helper text and dense UI." },
+];
+
+// ---- Spacing (8pt grid from spacing.css) ----
+const spacing = [
+  { token: "--space-1", px: "4px" },
+  { token: "--space-2", px: "8px" },
+  { token: "--space-3", px: "12px" },
+  { token: "--space-4", px: "16px" },
+  { token: "--space-5", px: "24px" },
+  { token: "--space-6", px: "32px" },
+  { token: "--space-7", px: "40px" },
+  { token: "--space-8", px: "48px" },
+];
+
+const radii = [
+  { token: "--radius-xs", px: "4px" },
+  { token: "--radius-sm", px: "5px" },
+  { token: "--radius-md", px: "8px" },
+  { token: "--radius-lg", px: "12px" },
+  { token: "--radius-xl", px: "16px" },
+  { token: "--radius-2xl", px: "24px" },
+  { token: "--radius-full", px: "999px" },
+];
+
+const shadows = [
+  { token: "--shadow-xs" },
+  { token: "--shadow-s" },
+  { token: "--shadow-md" },
+  { token: "--shadow-l" },
+  { token: "--shadow-xl" },
+  { token: "--shadow-xxl" },
+];
+---
+
+<Base title="Foundations" description="The UX4G design tokens: colour, type scale, spacing, radius and shadow.">
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Foundations</span>
+      <h1 class="h-display" style="font-size: clamp(36px, 5vw, var(--headline-1-size)); max-width: 20ch;">
+        Design tokens
+      </h1>
+      <p class="lead" style="margin-top: var(--space-5);">
+        Every component reads from these CSS variables. They are the universal layer
+        the React, and eventually native, packages share. The values below come
+        straight from <code class="code-inline">packages/tokens/tokens</code>.
+      </p>
+
+      <!-- COLOUR -->
+      <h2 class="h-section" style="margin-top: var(--space-12);">Colour</h2>
+
+      <h3 class="h-sub" style="margin-top: var(--space-6); font-size: var(--headline-6-size);">Primary ramp (violet)</h3>
+      <div class="grid grid--4" style="margin-top: var(--space-4); gap: var(--space-3);">
+        {primaryRamp.map((token, i) => (
+          <div class="surface" style="padding: 0; overflow: hidden;">
+            <div style={`height: 64px; background: var(${token});`}></div>
+            <div style="padding: var(--space-3);">
+              <code style="font-family: var(--font-mono); font-size: var(--body-3-size); color: var(--color-text);">{token}</code>
+              {token === "--violet-600" && (
+                <span style="display: block; margin-top: 2px; font-size: var(--body-3-size); color: var(--color-primary); font-weight: var(--weight-semibold);">brand · #613AF5</span>
+              )}
+              {i === 0 && token !== "--violet-600" && (
+                <span style="display: block; margin-top: 2px; font-size: var(--body-3-size); color: var(--color-text-subtle);">subtle</span>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h3 class="h-sub" style="margin-top: var(--space-8); font-size: var(--headline-6-size);">Semantic</h3>
+      <div class="grid grid--4" style="margin-top: var(--space-4); gap: var(--space-3);">
+        {semantic.map((c) => (
+          <div class="surface" style="padding: 0; overflow: hidden;">
+            <div style={`height: 64px; background: var(${c.name});`}></div>
+            <div style="padding: var(--space-3);">
+              <strong style="display: block; font-size: var(--body-2-size);">{c.note}</strong>
+              <code style="font-family: var(--font-mono); font-size: var(--body-3-size); color: var(--color-text-muted);">{c.name}</code>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <h3 class="h-sub" style="margin-top: var(--space-8); font-size: var(--headline-6-size);">Neutrals</h3>
+      <div class="grid grid--4" style="margin-top: var(--space-4); gap: var(--space-3);">
+        {neutralRamp.map((token) => (
+          <div class="surface" style="padding: 0; overflow: hidden;">
+            <div style={`height: 64px; background: var(${token}); border-bottom: var(--border-thin) solid var(--color-divider);`}></div>
+            <div style="padding: var(--space-3);">
+              <code style="font-family: var(--font-mono); font-size: var(--body-3-size); color: var(--color-text);">{token}</code>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- TYPE -->
+      <h2 class="h-section" style="margin-top: var(--space-12);">Type scale</h2>
+      <p class="lead" style="margin-top: var(--space-3);">
+        Noto Sans across the board for Indic-script coverage. Sizes and line heights
+        are paired tokens.
+      </p>
+      <div class="stack-lg" style="margin-top: var(--space-7);">
+        {typeScale.map((t) => (
+          <div style="border-bottom: var(--border-thin) solid var(--color-divider); padding-bottom: var(--space-5);">
+            <div style="display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: baseline; margin-bottom: var(--space-2);">
+              <code style="font-family: var(--font-mono); font-size: var(--body-3-size); color: var(--color-primary);">{`${t.token}-size / ${t.token}-line`}</code>
+              <span style="font-size: var(--body-3-size); color: var(--color-text-subtle);">{t.label}</span>
+            </div>
+            <p
+              style={`margin: 0; font-family: var(--font-sans); font-weight: ${t.weight}; font-size: var(${t.token}-size); line-height: var(${t.token}-line); color: var(--color-text);`}
+            >
+              {t.sample}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <!-- SPACING -->
+      <h2 class="h-section" style="margin-top: var(--space-12);">Spacing</h2>
+      <p class="lead" style="margin-top: var(--space-3);">An 8-point grid with 4px half-steps.</p>
+      <div class="stack" style="margin-top: var(--space-6);">
+        {spacing.map((s) => (
+          <div style="display: flex; align-items: center; gap: var(--space-4);">
+            <code style="font-family: var(--font-mono); font-size: var(--body-3-size); width: 120px; color: var(--color-text);">{s.token}</code>
+            <div style={`height: 16px; width: var(${s.token}); background: var(--color-primary); border-radius: var(--radius-xs);`}></div>
+            <span style="font-size: var(--body-3-size); color: var(--color-text-subtle);">{s.px}</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- RADIUS -->
+      <h2 class="h-section" style="margin-top: var(--space-12);">Radius</h2>
+      <div class="grid grid--4" style="margin-top: var(--space-6); gap: var(--space-4);">
+        {radii.map((r) => (
+          <div style="text-align: center;">
+            <div style={`height: 72px; background: var(--color-primary-subtle); border: var(--border-md) solid var(--color-primary); border-radius: var(${r.token});`}></div>
+            <code style="display: block; margin-top: var(--space-2); font-family: var(--font-mono); font-size: var(--body-3-size); color: var(--color-text);">{r.token}</code>
+            <span style="font-size: var(--body-3-size); color: var(--color-text-subtle);">{r.px}</span>
+          </div>
+        ))}
+      </div>
+
+      <!-- SHADOW -->
+      <h2 class="h-section" style="margin-top: var(--space-12);">Shadow</h2>
+      <div class="grid grid--3" style="margin-top: var(--space-6); gap: var(--space-7);">
+        {shadows.map((s) => (
+          <div style="text-align: center;">
+            <div style={`height: 88px; background: var(--color-surface); border-radius: var(--radius-lg); box-shadow: var(${s.token});`}></div>
+            <code style="display: block; margin-top: var(--space-4); font-family: var(--font-mono); font-size: var(--body-3-size); color: var(--color-text);">{s.token}</code>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
