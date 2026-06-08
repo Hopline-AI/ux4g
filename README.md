@@ -6,11 +6,9 @@
 
 # UX4G community packaging
 
-[UX4G](https://www.ux4g.gov.in/) is India's official government design system ("User Experience for Good Governance"), but it ships as a Figma kit with no straightforward way to use it in a real React project.
+[UX4G](https://www.ux4g.gov.in/) ("User Experience for Good Governance") is India's official government design system. Its official build is a Bootstrap-based CSS/JS bundle, shipped over a CDN or as a ZIP alongside a Figma kit. That fits server-rendered and jQuery-era sites, but it is not a React component library and not shadcn-compatible.
 
-This repo turns it into code: zero-dependency React components and CSS-variable tokens you install from npm, plus a shadcn registry you can copy component by component. 41 components, themeable, built to WCAG 2.2 AA.
-
-Live docs and component gallery: **[ux4g.pages.dev](https://ux4g.pages.dev)**
+This repo re-packages UX4G for modern React: zero-dependency components (no Bootstrap, no jQuery), CSS-variable tokens you install from npm, and a shadcn registry you can copy component by component. 41 components, themeable, built to WCAG 2.2 AA.
 
 > Unofficial and community-maintained. UX4G is © NeGD · MeitY, Government of India. This is not an official release.
 
