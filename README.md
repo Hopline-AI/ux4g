@@ -33,9 +33,13 @@ import { Button } from "@hopline/ux4g-react";
 
 ## Or own the source (shadcn registry)
 
+Pull any component straight from the hosted registry (swap `button` for any name):
+
 ```bash
-npx shadcn add ./registry/r/button.json
+npx shadcn add https://ux4g.pages.dev/r/button.json
 ```
+
+Or from a local checkout: `npx shadcn add ./registry/r/button.json`.
 
 ## Develop
 

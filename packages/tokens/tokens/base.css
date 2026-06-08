@@ -35,11 +35,11 @@ a {
 }
 a:hover { text-decoration: underline; }
 
-/* Accessible focus — visible 4px violet halo on keyboard nav */
+/* Accessible focus — visible violet halo on keyboard nav. Components with their
+   own class hooks (.ux-btn, .ux-nav__link…) upgrade this to the 4px halo. */
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
-  border-radius: var(--radius-xs);
 }
 
 img, svg { display: block; max-width: 100%; }

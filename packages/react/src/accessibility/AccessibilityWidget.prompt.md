@@ -4,8 +4,10 @@
 <AccessibilityWidget position="bottom-right" />
 ```
 
-Live controls (applied to `document.documentElement` and saved to localStorage):
-text size · line spacing · letter spacing · contrast · grayscale · highlight links · readable font · big cursor · pause motion · reading guide · reset all.
+Live controls — a 3-column tile grid, applied to `target` (default `document.documentElement`) and saved to localStorage:
+**Bigger Text · Smaller Text · Text Spacing · Line Height · Dyslexia Friendly · ADHD Mode · Saturation · Light-Dark · Invert Colors · Highlight Links · Text to Speech · Cursor · Pause Animation · Hide Images · Contrast**, plus **Reset all**.
 
 - **position**: `bottom-right` (default) · `bottom-left`.
 - **target**: scope adjustments to a specific element instead of the whole page.
+- Light-Dark and Invert Colors are mutually exclusive; the widget counter-filters itself so it stays legible while the page is darkened/inverted.
+- ADHD Mode dims the page except a reading band that follows the pointer; Text to Speech reads the main content and any text you select (Web Speech API).

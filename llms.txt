@@ -27,7 +27,7 @@ UX4G government design system. Unofficial packaging of UX4G (© NeGD · MeitY).
 - data: Table, Accordion, Pagination, List, Chart (Chart.js v4 wrapper), IndiaMap (data-driven choropleth)
 - navigation: Tabs, Breadcrumb, Stepper, Navbar, Footer
 - media: Carousel
-- accessibility: AccessibilityWidget (GIGW/RPwD universal-access launcher)
+- accessibility: AccessibilityWidget (GIGW/RPwD universal-access launcher — 15-tool tile grid: bigger/smaller text, text spacing, line height, dyslexia font, ADHD reading mask, saturation, light-dark, invert, highlight links, text-to-speech, big cursor, pause animation, hide images, contrast; persists to localStorage)
 
 ## Install one component (own the source)
 - npx shadcn add ./registry/r/button.json   (local; public @ux4g namespace once the site hosts it)
