@@ -69,7 +69,7 @@ export function Navbar({ title, subtitle, logo, links = [], actions, topStrip, s
         </div>
       ) : null}
 
-      <div style={{ maxWidth: "var(--container-max)", margin: "0 auto", padding: "0 24px", height: 72, display: "flex", alignItems: "center", gap: 28 }}>
+      <div style={{ maxWidth: "var(--container-max)", margin: "0 auto", padding: "10px 24px", minHeight: 72, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 16, rowGap: 10 }}>
         <a href="#" className="ux-nav__brand" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", flexShrink: 0, padding: "6px 8px", margin: "0 -8px", borderRadius: "var(--radius-md)" }}>
           <span style={{ display: "inline-flex" }}>{logo || UX4GMark}</span>
           <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.15 }}>
@@ -79,7 +79,7 @@ export function Navbar({ title, subtitle, logo, links = [], actions, topStrip, s
         </a>
 
         {links.length > 0 && (
-          <nav aria-label="Primary" style={{ display: "flex", alignItems: "center", gap: 4, marginLeft: 8 }}>
+          <nav aria-label="Primary" style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 4, marginLeft: 8 }}>
             {links.map((l, i) => (
               <a key={i} href={l.href || "#"} className="ux-nav__link" onClick={l.onClick} aria-current={l.active ? "page" : undefined}
                 style={{

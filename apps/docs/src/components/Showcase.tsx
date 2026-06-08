@@ -810,7 +810,6 @@ export default function Showcase() {
                 { label: "Home", href: "#", active: true },
                 { label: "Schemes", href: "#" },
                 { label: "Track application", href: "#" },
-                { label: "Help", href: "#" },
               ]}
               actions={<Button variant="primary" size="small">Sign in</Button>}
             />
