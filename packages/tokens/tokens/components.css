@@ -42,10 +42,10 @@
 
 /* ---- Navbar ---- */
 /* Keep the skip link hidden in any layout (a top:-48px offset only hides it
-   when the bar is page-top); reveal it on focus. */
+   when the bar is page-top); on focus, reveal it as a clear floating button. */
 .ux-nav__skip:not(:focus) { clip-path: inset(100%); }
-.ux-nav__skip:focus { transform: translateY(56px); }
-.ux-nav__skip:focus-visible,
+.ux-nav__skip:focus { transform: translateY(56px); outline: none; box-shadow: var(--shadow-l); }
+.ux-nav__skip:focus-visible { box-shadow: var(--focus-ring), var(--shadow-l); }
 .ux-nav__brand:focus-visible,
 .ux-nav__link:focus-visible { outline: none; box-shadow: var(--focus-ring); }
 .ux-nav__brand:hover .ux-nav__title { text-decoration: underline; }
