@@ -52,6 +52,7 @@ import {
   // accessibility
   AccessibilityWidget,
 } from "@hopline/ux4g-react";
+import { CODE } from "./code-samples";
 
 /* ------------------------------------------------------------------ */
 /* Small inline-SVG icon set (Lucide geometry, 24x24, 2px stroke)      */
@@ -93,6 +94,8 @@ const icons = {
   linkedin: <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></>,
   copy: <><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></>,
   check: <path d="M20 6 9 17l-5-5" />,
+  code: <><path d="m16 18 6-6-6-6" /><path d="m8 6-6 6 6 6" /></>,
+  chevronDown: <path d="m6 9 6 6 6-6" />,
 };
 
 /* ------------------------------------------------------------------ */
@@ -140,6 +143,43 @@ function CopyCmd({ slug }: { slug: string }) {
         <Icon path={copied ? icons.check : icons.copy} size={15} />
       </span>
     </button>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Per-component "Show code" panel — copyable usage snippet            */
+/* ------------------------------------------------------------------ */
+function CodePanel({ code }: { code: string }) {
+  const [open, setOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const copy = () => {
+    try {
+      navigator.clipboard?.writeText(code);
+    } catch {
+      /* clipboard may be unavailable */
+    }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1600);
+  };
+  return (
+    <div className="demo-code">
+      <button type="button" className="demo-code__toggle" onClick={() => setOpen((o) => !o)} aria-expanded={open}>
+        <Icon path={icons.code} size={15} />
+        {open ? "Hide code" : "Show code"}
+        <span style={{ display: "inline-flex", transform: open ? "rotate(180deg)" : "none", transition: "transform var(--duration-fast)" }}>
+          <Icon path={icons.chevronDown} size={15} />
+        </span>
+      </button>
+      {open ? (
+        <div className="demo-code__panel">
+          <button type="button" className="demo-code__copy" onClick={copy} aria-label="Copy code">
+            <Icon path={copied ? icons.check : icons.copy} size={14} />
+            {copied ? "Copied" : "Copy"}
+          </button>
+          <pre className="demo-code__pre"><code>{code}</code></pre>
+        </div>
+      ) : null}
+    </div>
   );
 }
 
@@ -231,6 +271,7 @@ function Demo({ name, hint, children }: { name: string; hint?: string; children:
       >
         {children}
       </div>
+      {CODE[slug(name)] ? <CodePanel code={CODE[slug(name)]} /> : null}
     </article>
   );
 }
