@@ -107,11 +107,12 @@ function Group({ id, title, summary, children }: { id: string; title: string; su
 function Demo({ name, hint, children }: { name: string; hint?: string; children: ReactNode }) {
   return (
     <article
+      className="demo-card"
       style={{
         border: "var(--border-thin) solid var(--color-border)",
         borderRadius: "var(--radius-lg)",
         background: "var(--color-surface)",
-        overflow: "hidden",
+        position: "relative",
       }}
     >
       <header
@@ -123,6 +124,9 @@ function Demo({ name, hint, children }: { name: string; hint?: string; children:
           padding: "var(--space-3) var(--space-4)",
           borderBottom: "var(--border-thin) solid var(--color-divider)",
           background: "var(--color-surface-subtle)",
+          borderTopLeftRadius: "var(--radius-lg)",
+          borderTopRightRadius: "var(--radius-lg)",
+          overflow: "hidden",
         }}
       >
         <h3
@@ -366,7 +370,7 @@ export default function Showcase() {
           <Switch label="Disabled" disabled />
         </Demo>
         <Demo name="Search"><SearchDemo /></Demo>
-        <Demo name="DatePicker"><DatePickerDemo /></Demo>
+        <Demo name="DatePicker"><div style={{ minHeight: 300, width: "100%" }}><DatePickerDemo /></div></Demo>
         <Demo name="RangeSlider"><RangeSliderDemo /></Demo>
         <Demo name="ColorPicker"><ColorPickerDemo /></Demo>
         <Demo name="FileUpload"><FileUploadDemo /></Demo>
@@ -453,22 +457,26 @@ export default function Showcase() {
       <Group id="overlay" title="Overlay" summary="Layered surfaces: dialogs, tooltips, menus and transient toasts.">
         <Demo name="Modal" hint="opens on click"><ModalDemo /></Demo>
         <Demo name="Tooltip" hint="hover or focus">
-          <Tooltip label="Saves a draft you can finish later">
-            <Button variant="primary" appearance="outlined">Save draft</Button>
-          </Tooltip>
-          <Tooltip label="Right" placement="right">
-            <Button variant="primary" appearance="text">Hover me</Button>
-          </Tooltip>
+          <div style={{ paddingTop: "var(--space-6)", display: "flex", gap: "var(--space-4)", flexWrap: "wrap" }}>
+            <Tooltip label="Saves a draft you can finish later">
+              <Button variant="primary" appearance="outlined">Save draft</Button>
+            </Tooltip>
+            <Tooltip label="Right" placement="right">
+              <Button variant="primary" appearance="text">Hover me</Button>
+            </Tooltip>
+          </div>
         </Demo>
         <Demo name="Menu" hint="click the trigger">
-          <Menu
-            trigger={<Button variant="primary" appearance="outlined" iconRight={<Icon path={icons.more} size={18} />}>Actions</Button>}
-            items={[
-              { label: "Edit", icon: <Icon path={icons.edit} size={18} />, onClick: () => {} },
-              { label: "Download", icon: <Icon path={icons.download} size={18} />, onClick: () => {} },
-              { label: "Delete", icon: <Icon path={icons.trash} size={18} />, danger: true, onClick: () => {} },
-            ]}
-          />
+          <div style={{ minHeight: 220, width: "100%" }}>
+            <Menu
+              trigger={<Button variant="primary" appearance="outlined" iconRight={<Icon path={icons.more} size={18} />}>Actions</Button>}
+              items={[
+                { label: "Edit", icon: <Icon path={icons.edit} size={18} />, onClick: () => {} },
+                { label: "Download", icon: <Icon path={icons.download} size={18} />, onClick: () => {} },
+                { label: "Delete", icon: <Icon path={icons.trash} size={18} />, danger: true, onClick: () => {} },
+              ]}
+            />
+          </div>
         </Demo>
         <Demo name="Toast"><ToastDemo /></Demo>
       </Group>

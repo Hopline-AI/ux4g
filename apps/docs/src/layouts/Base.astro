@@ -1,6 +1,7 @@
 ---
 import "@hopline/ux4g-tokens/styles.css";
 import "../styles/site.css";
+import "../styles/themes.css";
 
 interface Props {
   title?: string;
@@ -25,21 +26,108 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const isCurrent = (href: string) => (href === "/" ? path === "/" : path === href || path.startsWith(href + "/"));
 
 const github = "https://github.com/Hopline-AI/ux4g";
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL("/og/ux4g-og.png", Astro.site).href;
+
+// Switchable palettes (the swatch is each theme's AA-deepened primary).
+const themes = [
+  { id: "violet", name: "Violet", swatch: "#613AF5" },
+  { id: "sage", name: "Sage", swatch: "#4F8131" },
+  { id: "terracotta", name: "Terracotta", swatch: "#B95834" },
+  { id: "clay-gold", name: "Clay Gold", swatch: "#956D38" },
+  { id: "amber", name: "Amber", swatch: "#B0611C" },
+  { id: "coral", name: "Coral", swatch: "#D2403B" },
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://ux4g.pages.dev/#software",
+      name: "UX4G — Hopline community packaging",
+      description:
+        "Zero-dependency React components and CSS-variable design tokens for India's UX4G (User Experience for Good Governance) government design system. Unofficial community packaging.",
+      url: "https://ux4g.pages.dev/",
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "Any",
+      license: "https://opensource.org/licenses/MIT",
+      isAccessibleForFree: true,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      programmingLanguage: ["TypeScript", "CSS", "React"],
+      codeRepository: github,
+      author: { "@id": "https://hopline.co/#org" },
+      publisher: { "@id": "https://hopline.co/#org" },
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://ux4g.pages.dev/#website",
+      name: "UX4G — Hopline community packaging",
+      url: "https://ux4g.pages.dev/",
+      description:
+        "Docs and live component showcase for the Hopline community packaging of UX4G, India's government design system.",
+      inLanguage: "en",
+      publisher: { "@id": "https://hopline.co/#org" },
+      about: { "@id": "https://ux4g.pages.dev/#software" },
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://hopline.co/#org",
+      name: "Hopline",
+      url: "https://hopline.co",
+      slogan: "We turn vision and ideas into products",
+      description: "Hopline is a product studio that turns vision and ideas into products.",
+      logo: "https://hopline.co/og/hopline-og.png",
+      sameAs: ["https://github.com/Hopline-AI", "https://hopline.co"],
+    },
+  ],
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="violet">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Apply the saved palette before paint to avoid a flash of the default theme -->
+    <script is:inline>
+      (function () {
+        try {
+          var t = localStorage.getItem("ux4g-theme");
+          if (t) document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <link rel="canonical" href={canonical} />
+
     <meta name="theme-color" content="#613AF5" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="llms.txt" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="UX4G — Hopline community packaging" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="UX4G — Hopline community packaging" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <div class="site">
@@ -48,6 +136,21 @@ const github = "https://github.com/Hopline-AI/ux4g";
           <a class="wordmark" href="/" aria-label="UX4G home">
             <span class="wordmark__ux">UX</span><span class="wordmark__4g">4G</span>
           </a>
+
+          <div class="site-header__right">
+            <div class="theme-switcher" role="group" aria-label="Colour theme">
+              {themes.map((t) => (
+                <button
+                  type="button"
+                  class="theme-swatch"
+                  data-theme-btn={t.id}
+                  style={`--sw: ${t.swatch};`}
+                  title={`${t.name} theme`}
+                  aria-label={`${t.name} theme`}
+                  aria-pressed="false"
+                ></button>
+              ))}
+            </div>
 
           <nav class="site-nav" aria-label="Primary">
             {nav.map((item) => (
@@ -88,6 +191,7 @@ const github = "https://github.com/Hopline-AI/ux4g";
               <a class="site-nav__link" href={github} rel="noopener noreferrer" target="_blank">GitHub</a>
             </nav>
           </details>
+          </div>
         </div>
       </header>
 
@@ -99,13 +203,33 @@ const github = "https://github.com/Hopline-AI/ux4g";
         <div class="container site-footer__inner">
           <p>
             Unofficial community packaging · UX4G © NeGD · MeitY ·
-            <a href="https://ux4g.gov.in" rel="noopener noreferrer" target="_blank">ux4g.gov.in</a>
+            <a href="https://www.ux4g.gov.in/" rel="noopener noreferrer" target="_blank">ux4g.gov.in</a>
           </p>
           <p>
-            <a href={github} rel="noopener noreferrer" target="_blank">Source on GitHub</a>
+            Maintained by <a href="https://hopline.co" rel="noopener noreferrer" target="_blank">hopline.co</a>
+            · <a href={github} rel="noopener noreferrer" target="_blank">Source on GitHub</a>
           </p>
         </div>
       </footer>
     </div>
+
+    <script>
+      const KEY = "ux4g-theme";
+      const root = document.documentElement;
+      const btns = Array.from(document.querySelectorAll("[data-theme-btn]"));
+      function apply(theme: string) {
+        root.setAttribute("data-theme", theme);
+        try {
+          localStorage.setItem(KEY, theme);
+        } catch (e) {}
+        btns.forEach((b) =>
+          b.setAttribute("aria-pressed", String(b.getAttribute("data-theme-btn") === theme))
+        );
+      }
+      btns.forEach((b) =>
+        b.addEventListener("click", () => apply(b.getAttribute("data-theme-btn") || "violet"))
+      );
+      apply(root.getAttribute("data-theme") || "violet");
+    </script>
   </body>
 </html>

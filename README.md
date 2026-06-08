@@ -1,4 +1,4 @@
-# UX4G — Hopline community packaging
+# UX4G — community packaging
 
 An ultra-light, LLM-friendly packaging of **UX4G** (User Experience for Good
 Governance), India's government design system. Zero-dependency React components
@@ -49,3 +49,12 @@ universal layer the native packages reimplement against.
 ## Credits
 Design system: UX4G · NeGD · MeitY (ux4g.gov.in). Built from the
 *UX4G Design System 2.0 Web Kit (Community)* Figma. Icons: Lucide geometry (ISC).
+
+---
+
+<div align="center">
+  <a href="https://hopline.co">
+    <img src=".github/assets/hopline-banner.png" alt="Hopline — we turn vision and ideas into products" width="100%" />
+  </a>
+  <p><sub>Maintained by <a href="https://hopline.co">hopline.co</a> · Building in the open.</sub></p>
+</div>

@@ -14,7 +14,9 @@ registry/r/
 test-results/
 playwright-report/
 
-# Astro docs app (build output + generated registry copy)
+# Astro docs app (build output + generated registry copy + generated llms files)
 apps/docs/.astro/
 apps/docs/public/r/
 apps/docs/public/registry.json
+apps/docs/public/llms.txt
+apps/docs/public/llms-full.txt

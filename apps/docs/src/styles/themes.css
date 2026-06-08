@@ -1,0 +1,94 @@
+/* ============================================================
+   UX4G Theme Craft — switchable, WCAG 2.1 AA color themes
+   Each theme overrides only the *themeable* primary/secondary
+   aliases from @hopline/ux4g-tokens. Applied via a [data-theme]
+   attribute on <html> (the switcher in the header sets it and
+   persists the choice to localStorage).
+
+   AA guarantee: white text on --color-primary >= 4.5:1, the link
+   colour >= 4.5:1 on white, and --color-secondary >= 3:1 on white.
+   Non-violet seeds are mid-tones; primaries were deepened within
+   the same hue family until white passed. Ratios were computed,
+   not eyeballed. --color-focus is the final primary at 0.48 alpha.
+
+   The npm packages ship the official violet default; these extra
+   palettes are a docs-site demonstration of UX4G's themeability.
+   ============================================================ */
+
+/* Violet — official UX4G default. white-on-primary 6.12:1. */
+[data-theme="violet"] {
+  --color-primary:         #613AF5;
+  --color-primary-hover:   #4A26C4;
+  --color-primary-active:  #381C8A;
+  --color-primary-subtle:  #F4F3FE;
+  --color-on-primary:      #FFFFFF;
+  --color-secondary:       #8981AB;
+  --color-secondary-hover: #746D96;
+  --color-text-link:       #613AF5;
+  --color-focus:           rgba(97, 58, 245, 0.48);
+}
+
+/* Sage — Hopline brand green. seed #7C9070, primary deepened. 4.65:1. */
+[data-theme="sage"] {
+  --color-primary:         #4F8131;
+  --color-primary-hover:   #3D6426;
+  --color-primary-active:  #2D4A1C;
+  --color-primary-subtle:  #F7F9F5;
+  --color-on-primary:      #FFFFFF;
+  --color-secondary:       #7E9B7B;
+  --color-secondary-hover: #6E946B;
+  --color-text-link:       #4F8131;
+  --color-focus:           rgba(79, 129, 49, 0.48);
+}
+
+/* Terracotta — seed #C8613A. 4.66:1. */
+[data-theme="terracotta"] {
+  --color-primary:         #B95834;
+  --color-primary-hover:   #99492B;
+  --color-primary-active:  #7E3C23;
+  --color-primary-subtle:  #FAF6F5;
+  --color-on-primary:      #FFFFFF;
+  --color-secondary:       #A2917A;
+  --color-secondary-hover: #998366;
+  --color-text-link:       #B95834;
+  --color-focus:           rgba(185, 88, 52, 0.48);
+}
+
+/* Clay Gold — seed #B5894E. 4.64:1. */
+[data-theme="clay-gold"] {
+  --color-primary:         #956D38;
+  --color-primary-hover:   #77582D;
+  --color-primary-active:  #5D4523;
+  --color-primary-subtle:  #F9F8F5;
+  --color-on-primary:      #FFFFFF;
+  --color-secondary:       #999479;
+  --color-secondary-hover: #948E6B;
+  --color-text-link:       #956D38;
+  --color-focus:           rgba(149, 109, 56, 0.48);
+}
+
+/* Amber — seed #E0883C. 4.59:1. */
+[data-theme="amber"] {
+  --color-primary:         #B0611C;
+  --color-primary-hover:   #8D4D16;
+  --color-primary-active:  #6E3C11;
+  --color-primary-subtle:  #FAF7F4;
+  --color-on-primary:      #FFFFFF;
+  --color-secondary:       #9F936E;
+  --color-secondary-hover: #A0915F;
+  --color-text-link:       #B0611C;
+  --color-focus:           rgba(176, 97, 28, 0.48);
+}
+
+/* Coral — seed #D7544F. 4.63:1. */
+[data-theme="coral"] {
+  --color-primary:         #D2403B;
+  --color-primary-hover:   #BA302A;
+  --color-primary-active:  #9D2824;
+  --color-primary-subtle:  #FAF5F5;
+  --color-on-primary:      #FFFFFF;
+  --color-secondary:       #AC8C7C;
+  --color-secondary-hover: #9C7663;
+  --color-text-link:       #D2403B;
+  --color-focus:           rgba(210, 64, 59, 0.48);
+}

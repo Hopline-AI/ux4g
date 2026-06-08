@@ -1,0 +1,7 @@
+# https://ux4g.pages.dev/robots.txt
+# UX4G — Hopline community packaging. Open docs; crawlers and AI answer engines welcome.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://ux4g.pages.dev/sitemap-index.xml
