@@ -2,7 +2,5 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "ux4g",
   "compatibility_date": "2026-06-01",
-  "assets": {
-    "directory": "./apps/docs/dist"
-  }
+  "pages_build_output_dir": "./apps/docs/dist"
 }
