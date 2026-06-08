@@ -91,7 +91,57 @@ const icons = {
   twitter: <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />,
   github: <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />,
   linkedin: <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></>,
+  copy: <><rect x="9" y="9" width="13" height="13" rx="2" ry="2" /><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" /></>,
+  check: <path d="M20 6 9 17l-5-5" />,
 };
+
+/* ------------------------------------------------------------------ */
+/* shadcn-style copy-to-clipboard install command, per component       */
+/* ------------------------------------------------------------------ */
+function CopyCmd({ slug }: { slug: string }) {
+  const [copied, setCopied] = useState(false);
+  const cmd = `npx shadcn add https://ux4g.pages.dev/r/${slug}.json`;
+  const copy = () => {
+    try {
+      navigator.clipboard?.writeText(cmd);
+    } catch {
+      /* clipboard may be unavailable; the command is still shown */
+    }
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1600);
+  };
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      title={cmd}
+      aria-label={copied ? "Copied install command" : `Copy install command: ${cmd}`}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "var(--space-2)",
+        maxWidth: "min(440px, 52vw)",
+        padding: "4px 8px 4px 11px",
+        borderRadius: "var(--radius-md)",
+        border: "var(--border-thin) solid var(--color-border)",
+        background: "var(--color-surface)",
+        color: copied ? "var(--color-primary)" : "var(--color-text-muted)",
+        fontFamily: "var(--font-mono)",
+        fontSize: "var(--body-3-size)",
+        lineHeight: 1.4,
+        cursor: "pointer",
+        transition: "color var(--duration-fast), border-color var(--duration-fast)",
+      }}
+    >
+      <span style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        {copied ? "Copied to clipboard" : cmd}
+      </span>
+      <span style={{ flexShrink: 0, display: "inline-flex", color: copied ? "var(--color-primary)" : "var(--color-text-subtle)" }}>
+        <Icon path={copied ? icons.check : icons.copy} size={15} />
+      </span>
+    </button>
+  );
+}
 
 /* ------------------------------------------------------------------ */
 /* Layout helpers                                                      */
@@ -141,15 +191,16 @@ function Demo({ name, hint, children }: { name: string; hint?: string; children:
       <header
         style={{
           display: "flex",
-          alignItems: "baseline",
+          alignItems: "center",
           justifyContent: "space-between",
-          gap: "var(--space-4)",
+          gap: "var(--space-3)",
+          rowGap: "var(--space-2)",
+          flexWrap: "wrap",
           padding: "var(--space-3) var(--space-4)",
           borderBottom: "var(--border-thin) solid var(--color-divider)",
           background: "var(--color-surface-subtle)",
           borderTopLeftRadius: "var(--radius-lg)",
           borderTopRightRadius: "var(--radius-lg)",
-          overflow: "hidden",
         }}
       >
         <h3
@@ -162,9 +213,12 @@ function Demo({ name, hint, children }: { name: string; hint?: string; children:
         >
           {name}
         </h3>
-        {hint ? (
-          <span style={{ fontSize: "var(--body-3-size)", color: "var(--color-text-subtle)" }}>{hint}</span>
-        ) : null}
+        <div style={{ display: "flex", alignItems: "center", gap: "var(--space-3)", minWidth: 0 }}>
+          {hint ? (
+            <span style={{ fontSize: "var(--body-3-size)", color: "var(--color-text-subtle)", whiteSpace: "nowrap" }}>{hint}</span>
+          ) : null}
+          <CopyCmd slug={slug(name)} />
+        </div>
       </header>
       <div
         style={{

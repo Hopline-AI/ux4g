@@ -1,6 +1,6 @@
 {
   "name": "@hopline/ux4g-tokens",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "UX4G design tokens: CSS variables, fonts, interaction layer, and a typed theme object. Unofficial community packaging of UX4G (© NeGD · MeitY · ux4g.gov.in).",
   "license": "MIT",
   "author": "Hopline (https://hopline.co)",

@@ -52,17 +52,11 @@ export function Navbar({ title, subtitle, logo, links = [], actions, topStrip, s
       borderBottom: "1px solid var(--color-border)", position: sticky ? "sticky" : "relative",
       top: sticky ? 0 : undefined, zIndex: 50, width: "100%",
     }}>
-      {/* Accessible skip link: visually hidden (clipped) until it receives
-          keyboard focus, so it stays hidden wherever the header sits on the
-          page (a top:-48px offset only hides it when the bar is page-top). */}
-      <a href="#main" style={{
-        position: "absolute", left: 12, top: 8, zIndex: 60,
-        width: 1, height: 1, padding: 0, overflow: "hidden", clipPath: "inset(50%)",
-        background: "var(--color-primary)", color: "#fff", borderRadius: "var(--radius-md)",
-        fontSize: 14, fontWeight: 500, textDecoration: "none", whiteSpace: "nowrap",
-      }}
-        onFocus={(e) => { const s = e.currentTarget.style; s.width = "auto"; s.height = "auto"; s.padding = "8px 16px"; s.overflow = "visible"; s.clipPath = "none"; }}
-        onBlur={(e) => { const s = e.currentTarget.style; s.width = "1px"; s.height = "1px"; s.padding = "0"; s.overflow = "hidden"; s.clipPath = "inset(50%)"; }}>Skip to main content</a>
+      <a href="#main" className="ux-nav__skip" style={{
+        position: "absolute", left: 12, top: -48, background: "var(--color-primary)", color: "#fff",
+        padding: "8px 16px", borderRadius: "var(--radius-md)", fontSize: 14, fontWeight: 500, zIndex: 60,
+        transition: "transform var(--duration-fast)",
+      }}>Skip to main content</a>
 
       {topStrip ? (
         <div style={{
@@ -76,10 +70,10 @@ export function Navbar({ title, subtitle, logo, links = [], actions, topStrip, s
       ) : null}
 
       <div style={{ maxWidth: "var(--container-max)", margin: "0 auto", padding: "0 24px", height: 72, display: "flex", alignItems: "center", gap: 28 }}>
-        <a href="#" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", flexShrink: 0 }}>
+        <a href="#" className="ux-nav__brand" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none", flexShrink: 0, padding: "6px 8px", margin: "0 -8px", borderRadius: "var(--radius-md)" }}>
           <span style={{ display: "inline-flex" }}>{logo || UX4GMark}</span>
           <span style={{ display: "flex", flexDirection: "column", lineHeight: 1.15 }}>
-            <span style={{ fontSize: 17, fontWeight: 600, color: "var(--color-text)" }}>{title}</span>
+            <span className="ux-nav__title" style={{ fontSize: 17, fontWeight: 600, color: "var(--color-text)" }}>{title}</span>
             {subtitle && <span style={{ fontSize: 12, color: "var(--color-text-muted)" }}>{subtitle}</span>}
           </span>
         </a>
@@ -87,7 +81,7 @@ export function Navbar({ title, subtitle, logo, links = [], actions, topStrip, s
         {links.length > 0 && (
           <nav aria-label="Primary" style={{ display: "flex", alignItems: "center", gap: 4, marginLeft: 8 }}>
             {links.map((l, i) => (
-              <a key={i} href={l.href || "#"} onClick={l.onClick} aria-current={l.active ? "page" : undefined}
+              <a key={i} href={l.href || "#"} className="ux-nav__link" onClick={l.onClick} aria-current={l.active ? "page" : undefined}
                 style={{
                   position: "relative", padding: "8px 14px", minHeight: 44, display: "inline-flex", alignItems: "center",
                   fontSize: 15, fontWeight: l.active ? 600 : 500, borderRadius: "var(--radius-md)",
