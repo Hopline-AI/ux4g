@@ -3,6 +3,18 @@
   "version": "0.1.0",
   "description": "UX4G design tokens (CSS variables + typed theme). Unofficial community packaging of UX4G — © NeGD · MeitY · ux4g.gov.in.",
   "license": "MIT",
+  "author": "Hopline (https://hopline.co)",
+  "homepage": "https://ux4g.pages.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hopline-AI/ux4g.git",
+    "directory": "packages/tokens"
+  },
+  "bugs": "https://github.com/Hopline-AI/ux4g/issues",
+  "keywords": ["ux4g", "design-system", "design-tokens", "css-variables", "theme", "india", "government", "accessibility", "wcag"],
+  "publishConfig": {
+    "access": "public"
+  },
   "type": "module",
   "files": ["styles.css", "tokens", "dist"],
   "exports": {
