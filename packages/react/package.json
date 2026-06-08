@@ -1,6 +1,6 @@
 {
   "name": "@hopline/ux4g-react",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Zero-dependency, CSS-variable-themed React components for UX4G, India's government design system. Unofficial community packaging (© NeGD · MeitY · ux4g.gov.in).",
   "license": "MIT",
   "author": "Hopline (https://hopline.co)",

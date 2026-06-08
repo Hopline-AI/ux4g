@@ -10,6 +10,12 @@
       "description": "UX4G design tokens + interaction layer (one CSS file)."
     },
     {
+      "name": "accessibilitywidget",
+      "type": "registry:ui",
+      "title": "UX4G AccessibilityWidget",
+      "description": "UX4G AccessibilityWidget component."
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "UX4G Button",
@@ -26,6 +32,24 @@
       "type": "registry:ui",
       "title": "UX4G Accordion",
       "description": "UX4G Accordion component."
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "UX4G Chart",
+      "description": "UX4G Chart component."
+    },
+    {
+      "name": "indiamap",
+      "type": "registry:ui",
+      "title": "UX4G IndiaMap",
+      "description": "UX4G IndiaMap component."
+    },
+    {
+      "name": "list",
+      "type": "registry:ui",
+      "title": "UX4G List",
+      "description": "UX4G List component."
     },
     {
       "name": "pagination",
@@ -64,6 +88,12 @@
       "description": "UX4G Chip component."
     },
     {
+      "name": "comment",
+      "type": "registry:ui",
+      "title": "UX4G Comment",
+      "description": "UX4G Comment component."
+    },
+    {
       "name": "alert",
       "type": "registry:ui",
       "title": "UX4G Alert",
@@ -74,6 +104,12 @@
       "type": "registry:ui",
       "title": "UX4G EmptyState",
       "description": "UX4G EmptyState component."
+    },
+    {
+      "name": "feedbackwidget",
+      "type": "registry:ui",
+      "title": "UX4G FeedbackWidget",
+      "description": "UX4G FeedbackWidget component."
     },
     {
       "name": "progress",
@@ -166,6 +202,18 @@
       "description": "UX4G Breadcrumb component."
     },
     {
+      "name": "footer",
+      "type": "registry:ui",
+      "title": "UX4G Footer",
+      "description": "UX4G Footer component."
+    },
+    {
+      "name": "navbar",
+      "type": "registry:ui",
+      "title": "UX4G Navbar",
+      "description": "UX4G Navbar component."
+    },
+    {
       "name": "stepper",
       "type": "registry:ui",
       "title": "UX4G Stepper",
@@ -188,6 +236,12 @@
       "type": "registry:ui",
       "title": "UX4G Modal",
       "description": "UX4G Modal component."
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "UX4G Popover",
+      "description": "UX4G Popover component."
     },
     {
       "name": "toast",

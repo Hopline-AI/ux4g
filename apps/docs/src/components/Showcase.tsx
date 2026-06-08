@@ -1,4 +1,4 @@
-import { useState, type ReactNode, type CSSProperties } from "react";
+import { useState, useEffect, type ReactNode, type CSSProperties } from "react";
 import {
   // actions
   Button,
@@ -21,26 +21,36 @@ import {
   Badge,
   Chip,
   Avatar,
+  Comment,
   // feedback
   Alert,
   Progress,
   Spinner,
   EmptyState,
+  FeedbackWidget,
   // overlay
   Modal,
   Tooltip,
   Menu,
   Toast,
+  Popover,
   // data
   Table,
   Accordion,
   Pagination,
+  List,
+  Chart,
+  IndiaMap,
   // navigation
   Tabs,
   Breadcrumb,
   Stepper,
+  Navbar,
+  Footer,
   // media
   Carousel,
+  // accessibility
+  AccessibilityWidget,
 } from "@hopline/ux4g-react";
 
 /* ------------------------------------------------------------------ */
@@ -73,12 +83,23 @@ const icons = {
   more: <><circle cx="12" cy="5" r="1" /><circle cx="12" cy="12" r="1" /><circle cx="12" cy="19" r="1" /></>,
   download: <><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><path d="M7 10l5 5 5-5" /><path d="M12 15V3" /></>,
   inbox: <><path d="M22 12h-6l-2 3h-4l-2-3H2" /><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11Z" /></>,
+  bell: <><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" /><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" /></>,
+  fileText: <><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><path d="M14 2v6h6" /><path d="M16 13H8M16 17H8M10 9H8" /></>,
+  user: <><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></>,
+  shield: <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />,
+  accessibility: <><circle cx="12" cy="4" r="1" /><path d="m4 8 2-1h12l2 1M12 6v8m0 0-3 6m3-6 3 6" /></>,
+  twitter: <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />,
+  github: <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />,
+  linkedin: <><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /><rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" /></>,
 };
 
 /* ------------------------------------------------------------------ */
 /* Layout helpers                                                      */
 /* ------------------------------------------------------------------ */
-const groupStyle: CSSProperties = { marginTop: "var(--space-12)" };
+const groupStyle: CSSProperties = { marginTop: "var(--space-12)", scrollMarginTop: "84px" };
+
+/** Anchor slug shared by the sidebar links and each Demo card. */
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
 
 function Group({ id, title, summary, children }: { id: string; title: string; summary: string; children: ReactNode }) {
   return (
@@ -107,12 +128,14 @@ function Group({ id, title, summary, children }: { id: string; title: string; su
 function Demo({ name, hint, children }: { name: string; hint?: string; children: ReactNode }) {
   return (
     <article
+      id={slug(name)}
       className="demo-card"
       style={{
         border: "var(--border-thin) solid var(--color-border)",
         borderRadius: "var(--radius-lg)",
         background: "var(--color-surface)",
         position: "relative",
+        scrollMarginTop: "84px",
       }}
     >
       <header
@@ -277,6 +300,74 @@ function PaginationDemo() {
   return <Pagination page={page} pageCount={12} onChange={setPage} />;
 }
 
+/* Chart needs Chart.js on the page as window.Chart. We load it from the bundled
+   `chart.js/auto` build (registers every controller) so the demo works offline. */
+function ChartDemo() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    let alive = true;
+    if ((window as any).Chart) {
+      setReady(true);
+      return;
+    }
+    import("chart.js/auto")
+      .then((mod) => {
+        (window as any).Chart = mod.default;
+        if (alive) setReady(true);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  if (!ready) {
+    return (
+      <div style={{ width: "100%", height: 300, display: "grid", placeItems: "center", color: "var(--color-text-muted)", fontSize: "var(--body-2-size)" }}>
+        Loading Chart.js…
+      </div>
+    );
+  }
+  return (
+    <div style={{ width: "100%" }}>
+      <Chart
+        type="bar"
+        height={300}
+        data={{
+          labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep"],
+          datasets: [
+            { label: "Applications", data: [320, 410, 380, 520, 610, 700] },
+            { label: "Resolved", data: [280, 360, 350, 480, 540, 660] },
+          ],
+        }}
+      />
+    </div>
+  );
+}
+
+function IndiaMapDemo() {
+  const [selected, setSelected] = useState<string | undefined>("MH");
+  // Sample metric: scheme adoption per region (arbitrary illustrative values).
+  const values: Record<string, number> = {
+    UP: 240, MH: 198, BR: 176, WB: 152, MP: 140, TN: 134, RJ: 128, KA: 120,
+    GJ: 112, AP: 104, OR: 96, TG: 88, KL: 84, JH: 80, AS: 72, PB: 68, CT: 64,
+    HR: 60, JK: 44, UT: 40, HP: 32, TR: 22, ML: 18, MN: 16, NL: 14, GA: 12,
+    AR: 10, MZ: 9, SK: 7, DL: 90, PY: 8, CH: 6, AN: 4, DN: 3, DD: 3, LD: 2,
+  };
+  return (
+    <div style={{ width: "100%" }}>
+      <IndiaMap
+        values={values}
+        selected={selected}
+        onSelect={(code) => setSelected(code)}
+        legendLabel="Scheme adoption (thousands)"
+        formatValue={(v) => `${v}k`}
+        height={460}
+      />
+    </div>
+  );
+}
+
 /* ------------------------------------------------------------------ */
 /* The full showcase                                                   */
 /* ------------------------------------------------------------------ */
@@ -416,6 +507,28 @@ export default function Showcase() {
           <Avatar name="Meera Iyer" status="busy" shape="rounded" />
           <Avatar name="Government Portal" size={56} />
         </Demo>
+        <Demo name="Comment" hint="threaded replies">
+          <div style={{ width: "100%", maxWidth: 560 }}>
+            <Comment
+              author="Asha Rao"
+              timestamp="2 hours ago"
+              body="The new grievance form is much clearer. I could attach my documents on the first try."
+              actions={
+                <>
+                  <Button variant="primary" appearance="text" size="small">Reply</Button>
+                  <Button variant="primary" appearance="text" size="small">Helpful</Button>
+                </>
+              }
+            >
+              <Comment
+                author="Support Desk"
+                timestamp="1 hour ago"
+                highlight
+                body="Thank you for the feedback, Asha. We are glad the document upload worked smoothly."
+              />
+            </Comment>
+          </div>
+        </Demo>
       </Group>
 
       {/* ---------------- feedback ---------------- */}
@@ -451,6 +564,15 @@ export default function Showcase() {
             />
           </div>
         </Demo>
+        <Demo name="FeedbackWidget" hint="shown inline; ships as a corner launcher">
+          <FeedbackWidget
+            inline
+            defaultOpen
+            title="Share your feedback"
+            prompt="How was this service?"
+            categories={["Ease of use", "Speed", "Clarity", "Accessibility"]}
+          />
+        </Demo>
       </Group>
 
       {/* ---------------- overlay ---------------- */}
@@ -479,6 +601,24 @@ export default function Showcase() {
           </div>
         </Demo>
         <Demo name="Toast"><ToastDemo /></Demo>
+        <Demo name="Popover" hint="click the trigger">
+          <div style={{ minHeight: 200, display: "flex", gap: "var(--space-4)", flexWrap: "wrap", alignItems: "flex-start" }}>
+            <Popover
+              trigger={<Button variant="primary" appearance="outlined">Eligibility</Button>}
+              title="Who can apply?"
+            >
+              Any resident citizen aged 18 or above with a valid ID and an income
+              certificate issued in the last 12 months.
+            </Popover>
+            <Popover
+              placement="right"
+              trigger={<Button variant="primary" appearance="text" iconRight={<Icon path={icons.more} size={18} />}>More info</Button>}
+            >
+              Processing usually takes 15 working days. You will be notified by SMS
+              at each stage.
+            </Popover>
+          </div>
+        </Demo>
       </Group>
 
       {/* ---------------- data ---------------- */}
@@ -501,6 +641,44 @@ export default function Showcase() {
           </div>
         </Demo>
         <Demo name="Pagination"><PaginationDemo /></Demo>
+        <Demo name="List" hint="rows with leading + trailing slots">
+          <div style={{ width: "100%", maxWidth: 560 }}>
+            <List
+              interactive
+              chevron
+              items={[
+                {
+                  leading: <Icon path={icons.fileText} />,
+                  title: "Income certificate",
+                  description: "Issued by the Revenue Department",
+                  trailing: <Badge variant="success" appearance="tonal">Verified</Badge>,
+                  href: "#",
+                },
+                {
+                  leading: <Icon path={icons.fileText} />,
+                  title: "Caste certificate",
+                  description: "Required for reserved-category schemes",
+                  trailing: <Badge variant="warning" appearance="tonal">Pending</Badge>,
+                  href: "#",
+                },
+                {
+                  leading: <Icon path={icons.user} />,
+                  overline: "Profile",
+                  title: "Aadhaar linking",
+                  description: "Link your Aadhaar to receive benefits directly",
+                  href: "#",
+                  active: true,
+                },
+              ]}
+            />
+          </div>
+        </Demo>
+        <Demo name="Chart" hint="themed Chart.js v4 wrapper">
+          <ChartDemo />
+        </Demo>
+        <Demo name="IndiaMap" hint="data-driven choropleth — click a state">
+          <IndiaMapDemo />
+        </Demo>
       </Group>
 
       {/* ---------------- navigation ---------------- */}
@@ -523,6 +701,57 @@ export default function Showcase() {
                 { label: "Details", description: "Personal information" },
                 { label: "Documents", description: "Upload proofs" },
                 { label: "Review", description: "Confirm and submit" },
+              ]}
+            />
+          </div>
+        </Demo>
+        <Demo name="Navbar" hint="government website header">
+          <div style={{ width: "100%" }}>
+            <Navbar
+              topStrip
+              title="Department of Public Services"
+              subtitle="Government of India"
+              links={[
+                { label: "Home", href: "#", active: true },
+                { label: "Schemes", href: "#" },
+                { label: "Track application", href: "#" },
+                { label: "Help", href: "#" },
+              ]}
+              actions={<Button variant="primary" size="small">Sign in</Button>}
+            />
+          </div>
+        </Demo>
+        <Demo name="Footer" hint="portal footer with policy strip">
+          <div style={{ width: "100%" }}>
+            <Footer
+              tagline="Accessible, themeable building blocks for India's digital public services."
+              columns={[
+                {
+                  title: "Services",
+                  links: [
+                    { label: "Apply for a scheme", href: "#" },
+                    { label: "Track an application", href: "#" },
+                    { label: "File a grievance", href: "#" },
+                  ],
+                },
+                {
+                  title: "About",
+                  links: [
+                    { label: "Departments", href: "#" },
+                    { label: "Accessibility", href: "#" },
+                    { label: "Contact", href: "#" },
+                  ],
+                },
+              ]}
+              social={[
+                { label: "Twitter", href: "#", icon: <Icon path={icons.twitter} size={18} /> },
+                { label: "GitHub", href: "#", icon: <Icon path={icons.github} size={18} /> },
+                { label: "LinkedIn", href: "#", icon: <Icon path={icons.linkedin} size={18} /> },
+              ]}
+              policyLinks={[
+                { label: "Privacy policy", href: "#" },
+                { label: "Terms of use", href: "#" },
+                { label: "Accessibility statement", href: "#" },
               ]}
             />
           </div>
@@ -560,6 +789,37 @@ export default function Showcase() {
           </div>
         </Demo>
       </Group>
+
+      {/* ---------------- accessibility ---------------- */}
+      <Group
+        id="accessibility"
+        title="Accessibility"
+        summary="The GIGW / RPwD-aligned universal-access launcher — adjust text size, spacing, contrast, motion and more, persisted across visits."
+      >
+        <Demo name="AccessibilityWidget" hint="live — launcher docked at the bottom-right of this page">
+          <div style={{ width: "100%", maxWidth: 640, color: "var(--color-text-muted)", fontSize: "var(--body-2-size)", lineHeight: "var(--body-2-line)" }}>
+            <p style={{ marginBottom: "var(--space-3)" }}>
+              The accessibility launcher is mounted live on this page — look for the
+              universal-access button at the bottom-right corner. Open it to adjust
+              text size, line and letter spacing, contrast, grayscale, link
+              highlighting, a readable font, a larger cursor, paused motion and a
+              reading guide. Your choices apply instantly and are remembered on your
+              next visit.
+            </p>
+            <p>
+              In your own app you mount it once:{" "}
+              <code style={{ fontFamily: "var(--font-mono)", fontSize: "var(--body-3-size)" }}>
+                {"<AccessibilityWidget />"}
+              </code>
+              . It is the same "Accessibility Bar" pattern mandated across Indian
+              government portals.
+            </p>
+          </div>
+        </Demo>
+      </Group>
+
+      {/* The real launcher, mounted once for this page (fixed, bottom-right). */}
+      <AccessibilityWidget />
     </div>
   );
 }

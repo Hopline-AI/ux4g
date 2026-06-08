@@ -18,15 +18,16 @@ UX4G government design system. Unofficial packaging of UX4G (© NeGD · MeitY).
 - CSS variables: packages/tokens/tokens/*.css (semantic aliases: --color-primary, --color-text, --color-border, --color-focus, --radius-md, --space-4, --shadow-md).
 - Typed JS: import { theme, tokens } from "@hopline/ux4g-tokens/theme".
 
-## Components (32; usage note beside each source as *.prompt.md, contract in contracts/)
+## Components (41; usage note beside each source as *.prompt.md, contract in contracts/)
 - actions: Button, IconButton
 - forms: Input, Textarea, Select, Checkbox, Radio, Switch, Search, DatePicker, RangeSlider, ColorPicker, FileUpload
-- display: Card, Badge, Chip, Avatar
-- feedback: Alert, Progress, Spinner, EmptyState
-- overlay: Modal, Tooltip, Menu, Toast
-- data: Table, Accordion, Pagination
-- navigation: Tabs, Breadcrumb, Stepper
+- display: Card, Badge, Chip, Avatar, Comment
+- feedback: Alert, Progress, Spinner, EmptyState, FeedbackWidget
+- overlay: Modal, Tooltip, Menu, Toast, Popover
+- data: Table, Accordion, Pagination, List, Chart (Chart.js v4 wrapper), IndiaMap (data-driven choropleth)
+- navigation: Tabs, Breadcrumb, Stepper, Navbar, Footer
 - media: Carousel
+- accessibility: AccessibilityWidget (GIGW/RPwD universal-access launcher)
 
 ## Install one component (own the source)
 - npx shadcn add ./registry/r/button.json   (local; public @ux4g namespace once the site hosts it)

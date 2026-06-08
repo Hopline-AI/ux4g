@@ -46,18 +46,24 @@ component reads from. Without it, components render unstyled.
 
 ## What you get
 
-32 components across eight groups:
+41 components across nine groups:
 
 | Group | Components |
 | --- | --- |
 | Actions | Button, IconButton |
 | Forms | Input, Textarea, Select, Checkbox, Radio, Switch, Search, DatePicker, RangeSlider, ColorPicker, FileUpload |
-| Display | Card, Badge, Chip, Avatar |
-| Feedback | Alert, Progress, Spinner, EmptyState |
-| Overlay | Modal, Tooltip, Menu, Toast |
-| Data | Table, Accordion, Pagination |
-| Navigation | Tabs, Breadcrumb, Stepper |
+| Display | Card, Badge, Chip, Avatar, Comment |
+| Feedback | Alert, Progress, Spinner, EmptyState, FeedbackWidget |
+| Overlay | Modal, Tooltip, Menu, Toast, Popover |
+| Data | Table, Accordion, Pagination, List, Chart, IndiaMap |
+| Navigation | Tabs, Breadcrumb, Stepper, Navbar, Footer |
 | Media | Carousel |
+| Accessibility | AccessibilityWidget |
+
+`Chart` is a thin wrapper around [Chart.js](https://www.chartjs.org/) v4 — load
+it on the page as `window.Chart` (CDN or bundle) and the wrapper applies the
+UX4G palette, fonts and grid. `IndiaMap` is a self-contained, data-driven
+choropleth (it ships its own simplified geometry, no map library needed).
 
 ## Why this packaging
 
