@@ -1,94 +1,153 @@
 /* ============================================================
    UX4G Theme Craft — switchable, WCAG 2.1 AA color themes
-   Each theme overrides only the *themeable* primary/secondary
-   aliases from @hopline/ux4g-tokens. Applied via a [data-theme]
-   attribute on <html> (the switcher in the header sets it and
-   persists the choice to localStorage).
+   Applied via a [data-theme] attribute on <html> (the header
+   switcher sets it and persists the choice to localStorage).
 
-   AA guarantee: white text on --color-primary >= 4.5:1, the link
-   colour >= 4.5:1 on white, and --color-secondary >= 3:1 on white.
-   Non-violet seeds are mid-tones; primaries were deepened within
-   the same hue family until white passed. Ratios were computed,
-   not eyeballed. --color-focus is the final primary at 0.48 alpha.
+   IMPORTANT: components read the RAW --violet-* brand ramp
+   directly (e.g. Button uses var(--violet-600)), and the semantic
+   --color-* aliases are defined as var(--violet-*). So a theme must
+   override the *ramp* — that re-themes both the components and the
+   aliases at once. Semantic colours (success/danger/warning/info)
+   and neutrals are intentionally left unchanged across themes.
 
-   The npm packages ship the official violet default; these extra
-   palettes are a docs-site demonstration of UX4G's themeability.
+   Each step 600 is the AA-verified primary anchor (white text on it
+   >= 4.5:1); --color-secondary (= --secondary-500) is >= 3:1 on
+   white. Violet is the default and comes from :root in the tokens
+   package, so it needs no block here. The npm packages ship the
+   violet default; these extra palettes are a docs-site demo.
    ============================================================ */
 
-/* Violet — official UX4G default. white-on-primary 6.12:1. */
-[data-theme="violet"] {
-  --color-primary:         #613AF5;
-  --color-primary-hover:   #4A26C4;
-  --color-primary-active:  #381C8A;
-  --color-primary-subtle:  #F4F3FE;
-  --color-on-primary:      #FFFFFF;
-  --color-secondary:       #8981AB;
-  --color-secondary-hover: #746D96;
-  --color-text-link:       #613AF5;
-  --color-focus:           rgba(97, 58, 245, 0.48);
-}
-
-/* Sage — Hopline brand green. seed #7C9070, primary deepened. 4.65:1. */
+/* Sage — Hopline brand green */
 [data-theme="sage"] {
-  --color-primary:         #4F8131;
-  --color-primary-hover:   #3D6426;
-  --color-primary-active:  #2D4A1C;
-  --color-primary-subtle:  #F7F9F5;
-  --color-on-primary:      #FFFFFF;
-  --color-secondary:       #7E9B7B;
-  --color-secondary-hover: #6E946B;
-  --color-text-link:       #4F8131;
-  --color-focus:           rgba(79, 129, 49, 0.48);
+  --violet-50: #F1F5EF;
+  --violet-100: #DCE6D6;
+  --violet-200: #BCCFB1;
+  --violet-300: #9CB88C;
+  --violet-400: #799F62;
+  --violet-500: #618E46;
+  --violet-600: #4F8131;
+  --violet-700: #426C29;
+  --violet-800: #365821;
+  --violet-900: #294319;
+
+  --secondary-50: #F2F5F2;
+  --secondary-100: #E5EBE5;
+  --secondary-200: #CED9CD;
+  --secondary-300: #B4C5B2;
+  --secondary-400: #9AB198;
+  --secondary-500: #7E9B7B;
+  --secondary-600: #6C856A;
+  --secondary-700: #5B7059;
+  --secondary-800: #495A47;
+  --secondary-900: #394637;
+
+  --color-focus: rgba(79, 129, 49, 0.48);
 }
 
-/* Terracotta — seed #C8613A. 4.66:1. */
+/* Terracotta */
 [data-theme="terracotta"] {
-  --color-primary:         #B95834;
-  --color-primary-hover:   #99492B;
-  --color-primary-active:  #7E3C23;
-  --color-primary-subtle:  #FAF6F5;
-  --color-on-primary:      #FFFFFF;
-  --color-secondary:       #A2917A;
-  --color-secondary-hover: #998366;
-  --color-text-link:       #B95834;
-  --color-focus:           rgba(185, 88, 52, 0.48);
+  --violet-50: #F9F2EF;
+  --violet-100: #F1DED6;
+  --violet-200: #E4C0B2;
+  --violet-300: #D8A18D;
+  --violet-400: #CA8065;
+  --violet-500: #C06948;
+  --violet-600: #B95834;
+  --violet-700: #9B4A2C;
+  --violet-800: #7E3C23;
+  --violet-900: #602E1B;
+
+  --secondary-50: #F6F4F2;
+  --secondary-100: #ECE9E4;
+  --secondary-200: #DCD5CC;
+  --secondary-300: #C9BFB2;
+  --secondary-400: #B6A997;
+  --secondary-500: #A2917A;
+  --secondary-600: #8B7D69;
+  --secondary-700: #756858;
+  --secondary-800: #5E5447;
+  --secondary-900: #494137;
+
+  --color-focus: rgba(185, 88, 52, 0.48);
 }
 
-/* Clay Gold — seed #B5894E. 4.64:1. */
+/* Clay Gold */
 [data-theme="clay-gold"] {
-  --color-primary:         #956D38;
-  --color-primary-hover:   #77582D;
-  --color-primary-active:  #5D4523;
-  --color-primary-subtle:  #F9F8F5;
-  --color-on-primary:      #FFFFFF;
-  --color-secondary:       #999479;
-  --color-secondary-hover: #948E6B;
-  --color-text-link:       #956D38;
-  --color-focus:           rgba(149, 109, 56, 0.48);
+  --violet-50: #F7F3EF;
+  --violet-100: #EAE2D7;
+  --violet-200: #D7C8B3;
+  --violet-300: #C4AD90;
+  --violet-400: #AE9068;
+  --violet-500: #A07C4C;
+  --violet-600: #956D38;
+  --violet-700: #7D5C2F;
+  --violet-800: #654A26;
+  --violet-900: #4D391D;
+
+  --secondary-50: #F5F4F2;
+  --secondary-100: #EBEAE4;
+  --secondary-200: #D8D6CC;
+  --secondary-300: #C4C1B1;
+  --secondary-400: #AFAC96;
+  --secondary-500: #999479;
+  --secondary-600: #847F68;
+  --secondary-700: #6E6B57;
+  --secondary-800: #595646;
+  --secondary-900: #454336;
+
+  --color-focus: rgba(149, 109, 56, 0.48);
 }
 
-/* Amber — seed #E0883C. 4.59:1. */
+/* Amber */
 [data-theme="amber"] {
-  --color-primary:         #B0611C;
-  --color-primary-hover:   #8D4D16;
-  --color-primary-active:  #6E3C11;
-  --color-primary-subtle:  #FAF7F4;
-  --color-on-primary:      #FFFFFF;
-  --color-secondary:       #9F936E;
-  --color-secondary-hover: #A0915F;
-  --color-text-link:       #B0611C;
-  --color-focus:           rgba(176, 97, 28, 0.48);
+  --violet-50: #F9F2ED;
+  --violet-100: #EFDFD2;
+  --violet-200: #E1C3A9;
+  --violet-300: #D3A780;
+  --violet-400: #C38752;
+  --violet-500: #B87133;
+  --violet-600: #B0611C;
+  --violet-700: #945118;
+  --violet-800: #784213;
+  --violet-900: #5C320F;
+
+  --secondary-50: #F5F4F1;
+  --secondary-100: #ECE9E2;
+  --secondary-200: #DBD6C8;
+  --secondary-300: #C7C0AB;
+  --secondary-400: #B4AB8E;
+  --secondary-500: #9F936E;
+  --secondary-600: #897E5F;
+  --secondary-700: #726A4F;
+  --secondary-800: #5C5540;
+  --secondary-900: #484231;
+
+  --color-focus: rgba(176, 97, 28, 0.48);
 }
 
-/* Coral — seed #D7544F. 4.63:1. */
+/* Coral */
 [data-theme="coral"] {
-  --color-primary:         #D2403B;
-  --color-primary-hover:   #BA302A;
-  --color-primary-active:  #9D2824;
-  --color-primary-subtle:  #FAF5F5;
-  --color-on-primary:      #FFFFFF;
-  --color-secondary:       #AC8C7C;
-  --color-secondary-hover: #9C7663;
-  --color-text-link:       #D2403B;
-  --color-focus:           rgba(210, 64, 59, 0.48);
+  --violet-50: #FBF0EF;
+  --violet-100: #F6D9D8;
+  --violet-200: #EEB6B5;
+  --violet-300: #E69491;
+  --violet-400: #DD6E6A;
+  --violet-500: #D7534F;
+  --violet-600: #D2403B;
+  --violet-700: #B03632;
+  --violet-800: #8F2C28;
+  --violet-900: #6D211F;
+
+  --secondary-50: #F7F4F2;
+  --secondary-100: #EEE8E5;
+  --secondary-200: #DFD3CD;
+  --secondary-300: #CFBCB3;
+  --secondary-400: #BEA599;
+  --secondary-500: #AC8C7C;
+  --secondary-600: #94786B;
+  --secondary-700: #7C6559;
+  --secondary-800: #645148;
+  --secondary-900: #4D3F38;
+
+  --color-focus: rgba(210, 64, 59, 0.48);
 }

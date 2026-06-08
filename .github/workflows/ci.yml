@@ -44,3 +44,6 @@ jobs:
       # these are deterministic across OS. Pixel screenshots run via
       # visual-baselines.yml once Linux baselines are committed.
       - run: npx playwright test -c visual/playwright.config.ts design-specs
+      # Theming proofs: switch palettes and assert the real components (not just
+      # the site chrome) re-theme. Runs against the built docs site.
+      - run: npx playwright test -c visual/playwright.docs.config.ts

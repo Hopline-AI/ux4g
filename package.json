@@ -8,6 +8,7 @@
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm -r test",
     "test:visual": "pnpm build && playwright test -c visual/playwright.config.ts",
+    "test:theme": "pnpm build && playwright test -c visual/playwright.docs.config.ts",
     "registry:build": "node scripts/build-registry.mjs"
   },
   "devDependencies": {
