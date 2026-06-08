@@ -2,19 +2,23 @@
 import Base from "../layouts/Base.astro";
 import Showcase from "../components/Showcase.tsx";
 
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+
 const groups = [
-  { id: "actions", label: "Actions" },
-  { id: "forms", label: "Forms" },
-  { id: "display", label: "Display" },
-  { id: "feedback", label: "Feedback" },
-  { id: "overlay", label: "Overlay" },
-  { id: "data", label: "Data" },
-  { id: "navigation", label: "Navigation" },
-  { id: "media", label: "Media" },
+  { id: "actions", label: "Actions", items: ["Button", "IconButton"] },
+  { id: "forms", label: "Forms", items: ["Input", "Textarea", "Select", "Checkbox", "Radio", "Switch", "Search", "DatePicker", "RangeSlider", "ColorPicker", "FileUpload"] },
+  { id: "display", label: "Display", items: ["Card", "Badge", "Chip", "Avatar", "Comment"] },
+  { id: "feedback", label: "Feedback", items: ["Alert", "Progress", "Spinner", "EmptyState", "FeedbackWidget"] },
+  { id: "overlay", label: "Overlay", items: ["Modal", "Tooltip", "Menu", "Toast", "Popover"] },
+  { id: "data", label: "Data", items: ["Table", "Accordion", "Pagination", "List", "Chart", "IndiaMap"] },
+  { id: "navigation", label: "Navigation", items: ["Tabs", "Breadcrumb", "Stepper", "Navbar", "Footer"] },
+  { id: "media", label: "Media", items: ["Carousel"] },
+  { id: "accessibility", label: "Accessibility", items: ["AccessibilityWidget"] },
 ];
+const total = groups.reduce((n, g) => n + g.items.length, 0);
 ---
 
-<Base title="Components" description="All 32 UX4G React components rendered live across eight groups — actions, forms, display, feedback, overlay, data, navigation and media. Zero runtime dependencies, styled entirely by design tokens, each with a typed contract.">
+<Base title="Components" description="All 41 UX4G React components rendered live across nine groups — actions, forms, display, feedback, overlay, data, navigation, media and accessibility. Zero runtime dependencies, styled entirely by design tokens, each with a typed contract.">
   <section class="section">
     <div class="container">
       <span class="eyebrow">Components</span>
@@ -22,7 +26,7 @@ const groups = [
         The full set, rendered live
       </h1>
       <p class="lead" style="margin-top: var(--space-5);">
-        All 32 components across eight groups, shown in their canonical states.
+        All {total} components across nine groups, shown in their canonical states.
         Everything here is the real <code class="code-inline">@hopline/ux4g-react</code>
         library running in the page, styled only by the design tokens.
       </p>
@@ -32,13 +36,78 @@ const groups = [
         in the matching <code class="code-inline">*.prompt.md</code> file beside the source.
       </p>
 
-      <nav aria-label="Component groups" style="margin-top: var(--space-6); display: flex; flex-wrap: wrap; gap: var(--space-2);">
+      <!-- Group jump-links: the sidebar replaces these on wider screens. -->
+      <nav class="comp-groupnav" aria-label="Component groups">
         {groups.map((g) => (
           <a class="site-nav__link" href={`#${g.id}`} style="border: var(--border-thin) solid var(--color-border);">{g.label}</a>
         ))}
       </nav>
+    </div>
 
-      <Showcase client:load />
+    <div class="comp-shell">
+      <aside class="comp-sidebar" aria-label="Component list">
+        <nav class="comp-sidebar__nav">
+          {groups.map((g) => (
+            <div class="comp-sidebar__group">
+              <a class="comp-sidebar__title" href={`#${g.id}`}>{g.label}</a>
+              <ul>
+                {g.items.map((name) => (
+                  <li>
+                    <a class="comp-sidebar__link" href={`#${slug(name)}`} data-spy={slug(name)}>{name}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      </aside>
+
+      <div class="comp-main">
+        <Showcase client:load />
+      </div>
     </div>
   </section>
 </Base>
+
+<script>
+  // Scroll-spy: highlight the sidebar link for the component nearest the top.
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>(".comp-sidebar__link"));
+  const targets = links
+    .map((l) => document.getElementById(l.dataset.spy || ""))
+    .filter((el): el is HTMLElement => !!el);
+  const sidebar = document.querySelector<HTMLElement>(".comp-sidebar");
+  if (targets.length) {
+    const visible = new Set<string>();
+    const setActive = () => {
+      let active: string | null = null;
+      for (const t of targets) {
+        if (visible.has(t.id)) { active = t.id; break; }
+      }
+      let activeLink: HTMLAnchorElement | null = null;
+      for (const l of links) {
+        const on = l.dataset.spy === active;
+        l.setAttribute("aria-current", on ? "true" : "false");
+        if (on) activeLink = l;
+      }
+      // Keep the active link visible within the sidebar's own scroll area,
+      // without scrolling the page.
+      if (sidebar && activeLink) {
+        const s = sidebar.getBoundingClientRect();
+        const l = activeLink.getBoundingClientRect();
+        if (l.top < s.top + 8) sidebar.scrollTop -= s.top + 8 - l.top;
+        else if (l.bottom > s.bottom - 8) sidebar.scrollTop += l.bottom - (s.bottom - 8);
+      }
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) visible.add((e.target as HTMLElement).id);
+          else visible.delete((e.target as HTMLElement).id);
+        }
+        setActive();
+      },
+      { rootMargin: "-84px 0px -68% 0px", threshold: 0 },
+    );
+    targets.forEach((t) => io.observe(t));
+  }
+</script>

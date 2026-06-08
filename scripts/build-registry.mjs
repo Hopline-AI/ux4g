@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, basename } from "node:path";
 
 const ROOT = process.cwd();
@@ -37,6 +37,30 @@ for (const group of groups) {
   for (const file of readdirSync(join(SRC, group)).filter((f) => f.endsWith(".tsx"))) {
     const name = basename(file, ".tsx");
     const slug = name.toLowerCase();
+    const source = readFileSync(join(SRC, group, file), "utf8");
+    const files = [{
+      path: `ux4g/${file}`,
+      type: "registry:ui",
+      target: `components/ux4g/${file}`,
+      content: source,
+    }];
+    // Bundle sibling modules referenced via a relative import so the component
+    // resolves standalone after `shadcn add` (e.g. IndiaMap -> ./IndiaGeo).
+    const relDeps = new Set([...source.matchAll(/from\s+["']\.\/([A-Za-z0-9_-]+)["']/g)].map((m) => m[1]));
+    for (const dep of relDeps) {
+      for (const ext of [".ts", ".tsx"]) {
+        const depPath = join(SRC, group, dep + ext);
+        if (existsSync(depPath)) {
+          files.push({
+            path: `ux4g/${dep}${ext}`,
+            type: "registry:ui",
+            target: `components/ux4g/${dep}${ext}`,
+            content: readFileSync(depPath, "utf8"),
+          });
+          break;
+        }
+      }
+    }
     const item = {
       $schema: "https://ui.shadcn.com/schema/registry-item.json",
       name: slug,
@@ -45,12 +69,7 @@ for (const group of groups) {
       description: `UX4G ${name} component.`,
       dependencies: ["react"],
       registryDependencies: ["./ux4g-tokens.json"],
-      files: [{
-        path: `ux4g/${file}`,
-        type: "registry:ui",
-        target: `components/ux4g/${file}`,
-        content: readFileSync(join(SRC, group, file), "utf8"),
-      }],
+      files,
     };
     writeFileSync(join(OUT, `${slug}.json`), JSON.stringify(item, null, 2));
     items.push({ name: slug, type: "registry:ui", title: item.title, description: item.description });

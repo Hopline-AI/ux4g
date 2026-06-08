@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://ux4g.pages.dev">
+    <img src=".github/assets/ux4g-banner.png" alt="UX4G Design System — User Experience for Good Governance · 41 accessible, themeable React components and design tokens" width="100%">
+  </a>
+</p>
+
 # UX4G — community packaging
 
 An ultra-light, LLM-friendly packaging of **UX4G** (User Experience for Good
@@ -12,7 +18,7 @@ shadcn-compatible registry.
 
 - **`@hopline/ux4g-tokens`** — one CSS import (variables, fonts, interaction
   layer) + a typed `theme` object.
-- **`@hopline/ux4g-react`** — 32 zero-dependency React components (React 18+ peer).
+- **`@hopline/ux4g-react`** — 41 zero-dependency React components (React 18+ peer).
 
 ## Quickstart
 
