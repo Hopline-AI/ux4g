@@ -52,13 +52,17 @@ export function Navbar({ title, subtitle, logo, links = [], actions, topStrip, s
       borderBottom: "1px solid var(--color-border)", position: sticky ? "sticky" : "relative",
       top: sticky ? 0 : undefined, zIndex: 50, width: "100%",
     }}>
+      {/* Accessible skip link: visually hidden (clipped) until it receives
+          keyboard focus, so it stays hidden wherever the header sits on the
+          page (a top:-48px offset only hides it when the bar is page-top). */}
       <a href="#main" style={{
-        position: "absolute", left: 12, top: -48, background: "var(--color-primary)", color: "#fff",
-        padding: "8px 16px", borderRadius: "var(--radius-md)", fontSize: 14, fontWeight: 500, zIndex: 60,
-        transition: "top var(--duration-fast)",
+        position: "absolute", left: 12, top: 8, zIndex: 60,
+        width: 1, height: 1, padding: 0, overflow: "hidden", clipPath: "inset(50%)",
+        background: "var(--color-primary)", color: "#fff", borderRadius: "var(--radius-md)",
+        fontSize: 14, fontWeight: 500, textDecoration: "none", whiteSpace: "nowrap",
       }}
-        onFocus={(e) => (e.currentTarget.style.top = "8px")}
-        onBlur={(e) => (e.currentTarget.style.top = "-48px")}>Skip to main content</a>
+        onFocus={(e) => { const s = e.currentTarget.style; s.width = "auto"; s.height = "auto"; s.padding = "8px 16px"; s.overflow = "visible"; s.clipPath = "none"; }}
+        onBlur={(e) => { const s = e.currentTarget.style; s.width = "1px"; s.height = "1px"; s.padding = "0"; s.overflow = "hidden"; s.clipPath = "inset(50%)"; }}>Skip to main content</a>
 
       {topStrip ? (
         <div style={{
