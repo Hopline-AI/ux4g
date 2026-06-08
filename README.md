@@ -4,69 +4,60 @@
   </a>
 </p>
 
-# UX4G — community packaging
+# UX4G community packaging
 
-An ultra-light, LLM-friendly packaging of **UX4G** (User Experience for Good
-Governance), India's government design system. Zero-dependency React components
-and CSS-variable design tokens, distributed both as npm packages and as a
-shadcn-compatible registry.
+[UX4G](https://www.ux4g.gov.in/) is India's official government design system ("User Experience for Good Governance"), but it ships as a Figma kit with no straightforward way to use it in a real React project.
 
-> Unofficial community packaging. UX4G is © NeGD · MeitY, Government of India ·
-> ux4g.gov.in. This repo is not an official UX4G release.
+This repo turns it into code: zero-dependency React components and CSS-variable tokens you install from npm, plus a shadcn registry you can copy component by component. 41 components, themeable, built to WCAG 2.2 AA.
 
-## Packages
+Live docs and component gallery: **[ux4g.pages.dev](https://ux4g.pages.dev)**
 
-- **`@hopline/ux4g-tokens`** — one CSS import (variables, fonts, interaction
-  layer) + a typed `theme` object.
-- **`@hopline/ux4g-react`** — 41 zero-dependency React components (React 18+ peer).
+> Unofficial and community-maintained. UX4G is © NeGD · MeitY, Government of India. This is not an official release.
 
-## Quickstart
+## Install
 
 ```bash
 pnpm add @hopline/ux4g-react @hopline/ux4g-tokens
 ```
 
 ```tsx
-import "@hopline/ux4g-tokens/styles.css";
+import "@hopline/ux4g-tokens/styles.css"; // once, at the app root
 import { Button } from "@hopline/ux4g-react";
+
+export const Apply = () => <Button variant="primary">Apply now</Button>;
 ```
 
-## Or own the source (shadcn registry)
+- `@hopline/ux4g-react`: 41 React components (React 18+ peer, no other dependencies).
+- `@hopline/ux4g-tokens`: the design tokens as one CSS import plus a typed `theme` object.
 
-Pull any component straight from the hosted registry (swap `button` for any name):
+## Copy the source instead (shadcn)
+
+Prefer to own a component outright, with no dependency? Pull it from the hosted registry:
 
 ```bash
 npx shadcn add https://ux4g.pages.dev/r/button.json
 ```
 
-Or from a local checkout: `npx shadcn add ./registry/r/button.json`.
+Swap `button` for any component name. From a local checkout: `npx shadcn add ./registry/r/button.json`.
 
 ## Develop
 
 ```bash
 pnpm install
-pnpm build         # tokens + react
-pnpm test          # vitest
-pnpm registry:build
+pnpm build      # tokens + react
+pnpm test
 pnpm --filter playground dev   # live demo
 ```
 
-## Layout
-
-- `packages/tokens`, `packages/react` — the published packages.
-- `registry/` — shadcn registry (built to `registry/r/`).
-- `examples/playground` — Vite demo.
-- `llms.txt` — machine-readable index for coding agents.
+Layout: `packages/tokens` and `packages/react` are the published packages, `registry/` is the shadcn registry, `apps/docs` is the site, and `examples/playground` is a Vite demo.
 
 ## Roadmap
 
-Web (this repo) → React Native → Flutter. Tokens + the `contracts/*.d.ts` are the
-universal layer the native packages reimplement against.
+Web (this repo), then React Native, then Flutter. Each platform reimplements against the same tokens and `contracts/*.d.ts`.
 
 ## Credits
 
-Design system: UX4G · NeGD · MeitY (ux4g.gov.in). Built from the
-_UX4G Design System 2.0 Web Kit (Community)_ Figma. Icons: Lucide geometry (ISC).
+Modelled on UX4G (NeGD · MeitY, ux4g.gov.in) and built from the _UX4G Design System 2.0 Web Kit (Community)_ Figma. Icons use Lucide geometry (ISC). MIT licensed.
 
 <div align="center">
   <a href="https://hopline.co">
