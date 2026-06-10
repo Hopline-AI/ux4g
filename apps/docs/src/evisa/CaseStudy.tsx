@@ -93,7 +93,7 @@ function Glance() {
   ];
   return (
     <Doc style={{ paddingTop: 56, paddingBottom: 8 }}>
-      <div className="ev-grid ev-grid-4" style={{ display: "grid", gap: 18, gridTemplateColumns: "repeat(4,1fr)" }}>
+      <div style={{ display: "grid", gap: 18, gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))" }}>
         {items.map((it, i) => (
           <div key={i} style={{ background: "var(--color-surface)", border: "1px solid var(--color-border)", borderRadius: 14, padding: 20, boxShadow: "var(--shadow-xs)" }}>
             <span style={{ width: 40, height: 40, borderRadius: 10, background: "var(--color-primary-subtle)", display: "grid", placeItems: "center", marginBottom: 14 }}>
@@ -284,7 +284,7 @@ function Decisions() {
 function Mobile() {
   const phone = (src: string, alt: string, caption: string) => (
     <figure style={{ margin: 0, display: "flex", flexDirection: "column", alignItems: "center" }}>
-      <div style={{ width: 414, maxWidth: "100%", borderRadius: 40, padding: 12, background: "var(--color-text)", boxShadow: "0 18px 40px rgba(33,33,33,.22)" }}>
+      <div style={{ width: "100%", maxWidth: 414, borderRadius: 40, padding: 12, background: "var(--color-text)", boxShadow: "0 18px 40px rgba(33,33,33,.22)" }}>
         <div style={{ borderRadius: 28, overflow: "hidden", background: "var(--color-surface)" }}>
           <img src={src} alt={alt} loading="lazy" style={{ display: "block", width: "100%" }} />
         </div>
@@ -370,14 +370,20 @@ function Metrics() {
     <Section bg="var(--color-surface-subtle)">
       <Doc>
         <SectionNum n={8} kicker="Measuring success" title="How we'll know it worked" lead="The redesign has not yet faced live traffic, so this is a measurement plan rather than a results table — the six signals we would instrument from day one." />
-        <Table
-          columns={[
-            { key: "metric", header: "Metric", render: (r: { metric: string }) => <strong style={{ fontWeight: 600 }}>{r.metric}</strong> },
-            { key: "why", header: "Why it matters" },
-            { key: "signal", header: "Success looks like" },
-          ]}
-          rows={rows}
-        />
+        {/* min-width + scroll so the 3-column table stays readable on phones
+            (scrolls horizontally) instead of crushing into the viewport */}
+        <div style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
+          <div style={{ minWidth: 680 }}>
+            <Table
+              columns={[
+                { key: "metric", header: "Metric", render: (r: { metric: string }) => <strong style={{ fontWeight: 600 }}>{r.metric}</strong> },
+                { key: "why", header: "Why it matters" },
+                { key: "signal", header: "Success looks like" },
+              ]}
+              rows={rows}
+            />
+          </div>
+        </div>
       </Doc>
     </Section>
   );
@@ -456,7 +462,7 @@ function DocBar() {
           <span style={{ fontSize: 14, fontWeight: 600, color: "var(--color-text)", whiteSpace: "nowrap" }}>e-Visa portal redesign</span>
           <Badge variant="primary" appearance="tonal">Case study</Badge>
         </span>
-        <nav aria-label="Case study" style={{ display: "flex", alignItems: "center", gap: 18 }}>
+        <nav aria-label="Case study" style={{ display: "flex", alignItems: "center", gap: 18, flexWrap: "wrap", rowGap: 8 }}>
           <a href="/" style={navLink}>UX4G design system</a>
           <a href="/examples/evisa" style={navLink}>Redesigned portal</a>
           <a href="/examples/evisa/apply" style={navLink}>Apply flow</a>
