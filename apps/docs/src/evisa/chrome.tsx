@@ -43,6 +43,27 @@ function LogoSlot({ src, alt, label, height }: { src: string; alt: string; label
   return <img ref={ref} src={src} alt={alt} height={height} onError={() => setFailed(true)} style={{ height, width: "auto", flexShrink: 0 }} />;
 }
 
+/* ---------- footer trust badge (logo with text fallback) ----------
+   Same mount + onError fallback pattern as LogoSlot: fixed 150x54 white box
+   showing the official mark, or the text label if the PNG is missing. */
+function TrustBadge({ src, label }: { src: string; label: string }) {
+  const ref = React.useRef<HTMLImageElement>(null);
+  const [failed, setFailed] = React.useState(false);
+  React.useEffect(() => {
+    const img = ref.current;
+    if (img && img.complete && img.naturalWidth === 0) setFailed(true);
+  }, []);
+  return (
+    <span style={{ width: 150, height: 54, border: "1px solid var(--color-border)", borderRadius: 8, background: "var(--color-surface)", display: "grid", placeItems: "center" }}>
+      {failed ? (
+        <span style={{ textAlign: "center", fontSize: 12, fontWeight: 600, color: "var(--color-text-muted)", padding: "0 8px" }}>{label}</span>
+      ) : (
+        <img ref={ref} src={src} alt={label} onError={() => setFailed(true)} style={{ maxHeight: 38, maxWidth: 126, objectFit: "contain" }} />
+      )}
+    </span>
+  );
+}
+
 /* ---------- e-Visa brand wordmark (original mark) ---------- */
 export function EVisaMark({ size = 40 }: { size?: number }) {
   return (
@@ -311,16 +332,20 @@ export function GovHeader({ active, withTicker = true }: { active?: string; with
 
 /* ---------- Portal footer ---------- */
 export function PortalFooter() {
-  const trust = ["Digital India", "Swachh Bharat", "india.gov.in", "MyGov", "Incredible India"];
+  const trust = [
+    { label: "Digital India", src: "/evisa/assets/trust-digital-india.png" },
+    { label: "Swachh Bharat", src: "/evisa/assets/trust-swachh-bharat.png" },
+    { label: "india.gov.in", src: "/evisa/assets/trust-india-gov.png" },
+    { label: "MyGov", src: "/evisa/assets/trust-mygov.png" },
+    { label: "150 Years of the Mahatma", src: "/evisa/assets/trust-mahatma.png" },
+  ];
   return (
     <>
       {/* trust badge band */}
       <div style={{ background: "var(--color-surface-subtle)", borderTop: "1px solid var(--color-divider)" }}>
         <div style={{ maxWidth: "var(--container-max)", margin: "0 auto", padding: "22px 24px", display: "flex", flexWrap: "wrap", gap: 16, alignItems: "center", justifyContent: "center" }}>
           {trust.map((t, i) => (
-            <span key={i} style={{ width: 150, height: 54, display: "grid", placeItems: "center", textAlign: "center", border: "1px solid var(--color-border)", borderRadius: 8, background: "var(--color-surface)", fontSize: 12, fontWeight: 600, color: "var(--color-text-muted)", padding: "0 8px" }}>
-              {t}
-            </span>
+            <TrustBadge key={i} src={t.src} label={t.label} />
           ))}
         </div>
       </div>
