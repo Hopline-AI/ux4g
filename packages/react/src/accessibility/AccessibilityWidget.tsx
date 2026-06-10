@@ -42,7 +42,8 @@ const SAT_CAP = ["", "Low", "High", "None"];
  * 3-column tile grid lets any visitor adjust text size & spacing, dyslexia &
  * ADHD reading aids, saturation, dark / inverted colours, link highlighting,
  * text-to-speech, cursor size, motion and images. Changes apply live to
- * `target` and persist to localStorage.
+ * `target` and persist to localStorage. Text scaling uses CSS `zoom` because the
+ * kit is px-based, so a root font-size change would have no visible effect.
  */
 export function AccessibilityWidget({ position = "bottom-right", target }: AccessibilityWidgetProps) {
   const [open, setOpen] = React.useState(false);
@@ -60,7 +61,12 @@ export function AccessibilityWidget({ position = "bottom-right", target }: Acces
     const el = root();
     if (!el) return;
     const st = el.style;
-    st.fontSize = s.fontScale === 1 ? "" : `${Math.round(s.fontScale * 100)}%`;
+    // UX4G type is authored in absolute px (tokens + components), so scaling the
+    // root font-size only affects rem/em and has no visible effect on the kit.
+    // `zoom` scales px content reliably (page-zoom semantics) and reverses cleanly.
+    st.fontSize = "";
+    if (s.fontScale === 1) el.style.removeProperty("zoom");
+    else el.style.setProperty("zoom", String(s.fontScale));
     st.letterSpacing = s.spacing ? `${SPACING_PX[s.spacing]}px` : "";
     st.lineHeight = s.line ? LINE_VAL[s.line] : "";
     const filter = [
