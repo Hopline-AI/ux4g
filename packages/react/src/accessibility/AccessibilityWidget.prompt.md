@@ -10,4 +10,5 @@ Live controls — a 3-column tile grid, applied to `target` (default `document.d
 - **position**: `bottom-right` (default) · `bottom-left`.
 - **target**: scope adjustments to a specific element instead of the whole page.
 - Light-Dark and Invert Colors are mutually exclusive; the widget counter-filters itself so it stays legible while the page is darkened/inverted.
+- Bigger Text / Smaller Text scale the page via CSS `zoom` (the kit is px-based, so a root font-size change has no visible effect); capped at 0.8–1.6.
 - ADHD Mode dims the page except a reading band that follows the pointer; Text to Speech reads the main content and any text you select (Web Speech API).
