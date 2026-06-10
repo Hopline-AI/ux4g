@@ -13,9 +13,18 @@ const LOGOS = {
   evisa: "/evisa/assets/evisa-logo.png",
 };
 
-/* ---------- logo with placeholder fallback ---------- */
+/* ---------- logo with placeholder fallback ----------
+   Checks naturalWidth on mount as well as onError: under SSR the 404 can fire
+   before React attaches its onError handler, so the mount check is what
+   actually catches a missing logo. Drop real PNGs into /evisa/assets and the
+   <img> loads instead, no code change. */
 function LogoSlot({ src, alt, label, height }: { src: string; alt: string; label: string; height: number }) {
+  const ref = React.useRef<HTMLImageElement>(null);
   const [failed, setFailed] = React.useState(false);
+  React.useEffect(() => {
+    const img = ref.current;
+    if (img && img.complete && img.naturalWidth === 0) setFailed(true);
+  }, []);
   if (failed) {
     return (
       <span
@@ -31,7 +40,7 @@ function LogoSlot({ src, alt, label, height }: { src: string; alt: string; label
       </span>
     );
   }
-  return <img src={src} alt={alt} height={height} onError={() => setFailed(true)} style={{ height, width: "auto", flexShrink: 0 }} />;
+  return <img ref={ref} src={src} alt={alt} height={height} onError={() => setFailed(true)} style={{ height, width: "auto", flexShrink: 0 }} />;
 }
 
 /* ---------- e-Visa brand wordmark (original mark) ---------- */

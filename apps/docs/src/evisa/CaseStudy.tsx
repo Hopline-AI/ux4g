@@ -434,11 +434,16 @@ function SystemAndOutcome() {
 
 /* ---------- slim document chrome (this is a write-up, not the portal) ---------- */
 function Mark() {
+  const ref = React.useRef<HTMLImageElement>(null);
   const [failed, setFailed] = React.useState(false);
+  React.useEffect(() => {
+    const img = ref.current;
+    if (img && img.complete && img.naturalWidth === 0) setFailed(true);
+  }, []);
   if (failed) {
     return <span style={{ fontSize: 14, fontWeight: 700, color: "var(--color-primary)", letterSpacing: "-0.2px" }}>e-Visa</span>;
   }
-  return <img src="/evisa/assets/evisa-logo.png" alt="Indian e-Visa" onError={() => setFailed(true)} style={{ height: 30, width: "auto" }} />;
+  return <img ref={ref} src="/evisa/assets/evisa-logo.png" alt="Indian e-Visa" onError={() => setFailed(true)} style={{ height: 30, width: "auto" }} />;
 }
 
 function DocBar() {
