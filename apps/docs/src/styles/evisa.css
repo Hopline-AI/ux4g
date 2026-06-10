@@ -1,0 +1,141 @@
+/* UX4G e-Visa — app shell styles (layered over DS tokens).
+   Scoped under [data-evisa] so nothing leaks into the docs site chrome. */
+
+[data-evisa] { font-size: calc(16px * var(--user-font-scale, 1)); background: var(--color-surface); color: var(--color-text); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+[data-evisa] *, [data-evisa] *::before, [data-evisa] *::after { box-sizing: border-box; }
+[data-evisa] a { color: var(--color-text-link); }
+
+[data-evisa] .ev-section { max-width: var(--container-max); margin: 0 auto; padding-left: 24px; padding-right: 24px; }
+
+/* keyboard focus halo on custom interactive bits */
+[data-evisa] .ev-util-link:focus-visible, [data-evisa] .ev-nav-link:focus-visible, [data-evisa] button:focus-visible, [data-evisa] a:focus-visible {
+  outline: 2px solid var(--color-primary); outline-offset: 2px; border-radius: 4px;
+}
+[data-evisa] .ev-util-link:hover, [data-evisa] .ev-nav-link:hover { color: var(--color-primary); text-decoration: none; }
+[data-evisa] .ev-nav-link { transition: color var(--duration-fast) var(--ease-standard); }
+
+/* ---------- notices ticker ---------- */
+[data-evisa] .ev-ticker-track { animation: ev-marquee 38s linear infinite; will-change: transform; width: max-content; white-space: nowrap; }
+[data-evisa] .ev-ticker:hover .ev-ticker-track, [data-evisa] .ev-ticker:focus-within .ev-ticker-track, [data-evisa] .ev-ticker-track.is-paused { animation-play-state: paused; }
+@keyframes ev-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  [data-evisa] .ev-ticker-track { animation: none; flex-wrap: nowrap; }
+  [data-evisa] .ev-ticker-viewport { overflow-x: auto; }
+}
+
+/* ---------- responsive nav ---------- */
+[data-evisa] .ev-nav-mobile { display: none; }
+@media (max-width: 900px) {
+  [data-evisa] .ev-nav-desktop { display: none !important; }
+  [data-evisa] .ev-nav-toggle { display: inline-flex !important; }
+  [data-evisa] .ev-nav-quick { display: none !important; }
+}
+@media (max-width: 720px) {
+  [data-evisa] .ev-hide-sm { display: none !important; }
+}
+
+/* generic card-grid helpers */
+[data-evisa] .ev-grid { display: grid; gap: 20px; }
+@media (min-width: 640px) { [data-evisa] .ev-grid-2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 880px) { [data-evisa] .ev-grid-3 { grid-template-columns: repeat(3, 1fr); } [data-evisa] .ev-grid-4 { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 879px) { [data-evisa] .ev-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---------- section-level responsive ---------- */
+@media (max-width: 880px) {
+  [data-evisa] .ev-hero { grid-template-columns: 1fr !important; gap: 32px !important; }
+  [data-evisa] .ev-help-grid { grid-template-columns: 1fr !important; }
+}
+[data-evisa] .ev-service:hover { border-color: var(--color-primary) !important; box-shadow: var(--shadow-md) !important; }
+
+/* ---------- apply flow responsive ---------- */
+@media (max-width: 900px) {
+  [data-evisa] .ev-apply-grid { grid-template-columns: 1fr !important; }
+  [data-evisa] .ev-apply-rail { position: static !important; order: -1; }
+}
+@media (max-width: 640px) {
+  [data-evisa] .ev-field-grid { grid-template-columns: 1fr !important; }
+  [data-evisa] .ev-visa-choices { grid-template-columns: 1fr !important; }
+}
+
+/* ---------- mobile polish ---------- */
+/* footer links never break mid-label; rows wrap as whole links */
+[data-evisa] footer a { white-space: nowrap; }
+/* breadcrumb items stay on one line each */
+[data-evisa] .ev-breadcrumb-row a, [data-evisa] .ev-breadcrumb-row span, [data-evisa] .ev-breadcrumb-row li { white-space: nowrap; }
+/* stepper: at phone width show the numbered dots only — the step heading
+   ("Step 1 of 4 · title") already names the current step */
+@media (max-width: 640px) {
+  [data-evisa] .ev-stepper > div > div > div:last-child { display: none; }
+}
+/* masthead: tighter, single-row at phone width */
+@media (max-width: 720px) {
+  [data-evisa] .ev-masthead { gap: 12px !important; padding: 10px 16px !important; }
+  [data-evisa] .ev-masthead img[alt="Bureau of Immigration"] { height: 40px !important; }
+  [data-evisa] .ev-masthead img[alt="Indian e-Visa"] { height: 34px !important; }
+}
+
+/* ---------- case study responsive ---------- */
+@media (max-width: 760px) {
+  [data-evisa] .ev-ba-grid { grid-template-columns: 1fr !important; }
+  [data-evisa] .ev-issue-grid { grid-template-columns: 1fr !important; }
+  [data-evisa] .ev-pa-grid { grid-template-columns: 1fr !important; gap: 16px !important; }
+}
+
+/* ============================================================
+   Government service portal layout (landing page)
+   ============================================================ */
+
+/* intro band */
+[data-evisa] .ev-keyfacts { flex-shrink: 0; }
+@media (max-width: 820px) {
+  [data-evisa] .ev-intro { grid-template-columns: 1fr !important; }
+  [data-evisa] .ev-keyfacts { width: 100% !important; }
+}
+
+/* service launcher tiles */
+[data-evisa] .ev-services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); gap: 12px; }
+[data-evisa] .ev-tile {
+  display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+  border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface);
+  box-shadow: var(--shadow-xs); transition: border-color var(--duration-fast), box-shadow var(--duration-fast), transform var(--duration-fast);
+}
+[data-evisa] .ev-tile:hover { border-color: var(--color-primary); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+[data-evisa] .ev-tile.is-primary { border-color: var(--color-primary); background: var(--color-primary-subtle); box-shadow: var(--shadow-s); }
+
+/* three-column portal grid */
+[data-evisa] .ev-portal-grid { display: grid; grid-template-columns: 244px minmax(0, 1fr) 308px; gap: 28px; align-items: start; }
+[data-evisa] .ev-leftnav, [data-evisa] .ev-rightrail { position: sticky; top: 76px; }
+@media (max-width: 1080px) {
+  [data-evisa] .ev-portal-grid { grid-template-columns: minmax(0, 1fr) 308px; }
+  [data-evisa] .ev-leftnav { grid-column: 1 / -1; position: static; }
+}
+@media (max-width: 760px) {
+  [data-evisa] .ev-portal-grid { grid-template-columns: 1fr; }
+  [data-evisa] .ev-rightrail { position: static; }
+}
+[data-evisa] .ev-navrow { transition: background var(--duration-fast); }
+[data-evisa] .ev-navrow:hover { background: var(--color-primary-subtle); }
+
+/* numbered process flow with connector line */
+[data-evisa] .ev-process { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+[data-evisa] .ev-process-line { position: absolute; top: 18px; left: 12.5%; right: 12.5%; height: 2px; background: var(--color-border); z-index: 0; }
+[data-evisa] .ev-step { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 6px; }
+[data-evisa] .ev-step-num {
+  width: 36px; height: 36px; border-radius: 999px; background: var(--color-primary); color: #fff;
+  display: grid; place-items: center; font-weight: 700; font-size: 16px;
+  box-shadow: 0 0 0 5px var(--color-surface);
+}
+@media (max-width: 760px) {
+  [data-evisa] .ev-process { grid-template-columns: 1fr 1fr; gap: 24px; }
+  [data-evisa] .ev-process-line { display: none; }
+}
+@media (max-width: 420px) { [data-evisa] .ev-process { grid-template-columns: 1fr; } }
+
+/* visa category cards */
+[data-evisa] .ev-cat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); gap: 14px; }
+[data-evisa] .ev-cat {
+  display: flex; flex-direction: column; padding: 16px; border: 1px solid var(--color-border);
+  border-radius: 12px; background: var(--color-surface); box-shadow: var(--shadow-xs);
+  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+}
+[data-evisa] .ev-cat:hover { border-color: var(--color-primary); box-shadow: var(--shadow-md); }
