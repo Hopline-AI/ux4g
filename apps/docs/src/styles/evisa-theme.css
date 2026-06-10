@@ -1,0 +1,29 @@
+/* e-Visa theme — re-skin UX4G primary from violet to the original portal's
+   azure blue. Scoped to [data-evisa] so it never touches the docs site chrome.
+   UX4G components read the --violet-* ramp + --color-* aliases, so re-mapping
+   the ramp cascades the new primary everywhere on these pages. Blue chosen to
+   echo the legacy indianvisaonline.gov.in palette while keeping AA contrast for
+   white text on filled buttons. */
+[data-evisa] {
+  --violet-50:  #EAF3FB;
+  --violet-100: #CFE6F8;
+  --violet-200: #A6D2F1;
+  --violet-300: #74B6E8;
+  --violet-400: #3E97DC;
+  --violet-500: #1A82CF;
+  --violet-600: #1175BC; /* primary — ~4.7:1 on white */
+  --violet-700: #0E5E99; /* hover */
+  --violet-800: #0B4A78; /* active */
+  --violet-900: #083A5F;
+
+  /* semantic aliases (already reference the ramp, restated for clarity) */
+  --color-primary:        var(--violet-600);
+  --color-primary-hover:  var(--violet-700);
+  --color-primary-active: var(--violet-800);
+  --color-primary-subtle: var(--violet-50);
+  --color-text-link:      var(--violet-600);
+
+  /* focus halo (literal rgba in the base tokens — must override) */
+  --color-focus: rgba(17, 117, 188, 0.45);
+  --focus-ring:  0 0 0 4px var(--color-focus);
+}
